@@ -1,1 +1,0 @@
-# maven-etech-application
