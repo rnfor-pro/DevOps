@@ -19,7 +19,7 @@ sudo apt-get install trivy -y
 # Jenkins
 
 sudo apt update -y
-sudo apt install fontconfig openjdk-17-jre -y
+sudo apt-get install default-jdk -y
 java -version
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
 https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
@@ -40,3 +40,5 @@ sudo apt install maven -y
 echo "------------changing hostname--------------"
 sudo hostnamectl set-hostname jenkins_server
 bash
+
+################ END ################
