@@ -23,9 +23,8 @@ pipeline {
         steps{
        sh "mvn clean verify sonar:sonar \
   -Dsonar.projectKey=team9 \
-  -Dsonar.projectName='team9' \
-  -Dsonar.host.url=http://18.117.78.25:9000 \
-  -Dsonar.token=sqp_f8584c203e5d45c40bf1c29f14a339e4e96169bf"
+  -Dsonar.host.url=http://52.14.168.43:9000 \
+  -Dsonar.login=sqp_cd04b953d15f86fd96f9ac31a3edce2a6de2fe36"
       }
     }
   }
