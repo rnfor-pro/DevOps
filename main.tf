@@ -5,16 +5,16 @@ resource "aws_instance" "jenkins_ec2" {
   key_name                    = var.key_name
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.jenkins_sg.id]
-  user_data                   = "${file("install_jenkins.sh")}"
+  user_data                   = file("install_jenkins.sh")
 
   tags = {
-    Name = "CICD-project"
+    Name = "CICD2-project"
   }
 }
 
 # Jenkins Security Group
 resource "aws_security_group" "jenkins_sg" {
-  name        = "jenkins-sg"
+  name        = "jenkins-sg2"
   description = "Allow Port 22, 443, and 8080"
 
   ingress {
@@ -59,11 +59,11 @@ resource "aws_security_group" "jenkins_sg" {
 
 # Jenkins Slave EC2 Instances
 resource "aws_instance" "tomcat" {
-  ami                          = var.tomcat_ami_id
-  instance_type                = var.tomcat_instance_type
-  key_name                     = var.tomcat_key
-  associate_public_ip_address  = true
-  vpc_security_group_ids       = [aws_security_group.jenkins_sg.id]
+  ami                         = var.tomcat_ami_id
+  instance_type               = var.tomcat_instance_type
+  key_name                    = var.tomcat_key
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.jenkins_sg.id]
 
   tags = {
     Name = "tomcat"
@@ -75,7 +75,7 @@ resource "aws_instance" "tomcat" {
 #   bucket = var.bucket
 
 #   tags = {
-#     Name = "CICD-project"
+#     Name = "CICD2-project"
 #   }
 # }
 
