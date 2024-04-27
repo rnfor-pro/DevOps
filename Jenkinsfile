@@ -1,7 +1,7 @@
 pipeline {
   agent any
       environment {
-        FOO = "~/workspace/maven-build/MavenEnterpriseApp-web/target/MavenEnterpriseApplication.war"
+        artifacts = "~/workspace/maven-build/MavenEnterpriseApp-web/target/MavenEnterpriseApplication.war"
     }
   tools {
     maven 'maven'
