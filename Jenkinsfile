@@ -34,7 +34,7 @@ pipeline {
          steps{
              sshagent(['tomcat']) {
                sh """
-              scp -o StrictHostKeyChecking=no FOO ubuntu@3.21.102.135:/opt/tomcat/apache-tomcat-9.0.88/webapps
+              scp -o StrictHostKeyChecking=no ${FOO} ubuntu@3.21.102.135:/opt/tomcat/apache-tomcat-9.0.88/webapps
                """                          
 }
       }
