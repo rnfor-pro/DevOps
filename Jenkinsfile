@@ -1,7 +1,7 @@
 pipeline {
   agent any
       environment {
-        artifacts = "~/workspace/maven-build/MavenEnterpriseApp-web/target/MavenEnterpriseApplication.war"
+        PATH = "~/workspace/maven-build/MavenEnterpriseApp-web/target/MavenEnterpriseApplication.war"
     }
   tools {
     maven 'maven'
