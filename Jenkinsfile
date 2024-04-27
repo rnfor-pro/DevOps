@@ -1,8 +1,5 @@
 pipeline {
   agent any
-      environment {
-        PATH = "~/workspace/maven-build/MavenEnterpriseApp-web/target/MavenEnterpriseApplication.war"
-    }
   tools {
     maven 'maven'
   }
@@ -31,6 +28,9 @@ pipeline {
       }
     }
     stage('5-deploy-to-tomcat'){
+      environment {
+        TEST = "~/workspace/maven-build/MavenEnterpriseApp-web/target/MavenEnterpriseApplication.war"
+    }
          steps{
              sshagent(['tomcat']) {
                sh """
