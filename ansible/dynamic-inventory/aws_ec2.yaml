@@ -1,0 +1,20 @@
+plugin: aws_ec2
+aws_profile: default
+regions:
+  - us-east-1
+
+hostnames:
+  - ip-address
+
+#keyed_groups:
+#  - prefix: az #name of host group to be concatenated with key
+#    key: placement.availability_zone  #based on --list output parameters
+
+
+
+# jinja2 syntax
+# look for the string in the value field of redhat in tags.KEY
+# every value of redhat that matches to thew key OS will be in group redhat
+groups:
+  redhat: "'redhat' in tags.OS"
+  ubuntu: "'ubuntu' in tags.OS"
