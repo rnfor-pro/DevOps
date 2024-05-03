@@ -31,3 +31,5 @@ echo "~/update_path.sh" >> ~/.bashrc
 
 bash
 
+########## END  ############
+
