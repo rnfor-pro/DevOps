@@ -1,35 +1,35 @@
 #!/bin/bash
-# Update system packages and install Python 3 pip and Ansible
+
+export DEBIAN_FRONTEND=noninteractive
+
+# Check if running with sudo
+if [ "$(id -u)" -ne 0 ]; then
+    echo "This script must be run with sudo" >&2
+    exit 1
+fi
+
+# Update system packages
+apt update -y && apt upgrade -y || { echo "Failed to update system packages"; exit 1; }
+
+# Install Python 3 and pip
+apt install -y python3 python3-pip || { echo "Failed to install Python 3 and pip"; exit 1; }
+
+# Install Ansible with pip
+pip3 install ansible || { echo "Failed to install Ansible"; exit 1; }
+
+# Add ~/.local/bin to PATH if not already present
+if ! grep -qxF 'export PATH="$PATH:$HOME/.local/bin"' "$HOME/.bashrc"; then
+    echo 'export PATH="$PATH:$HOME/.local/bin"' >> "$HOME/.bashrc"
+    source "$HOME/.bashrc" || { echo "Failed to reload ~/.bashrc"; exit 1; }
+fi
+
+
 sudo hostnamectl set-hostname ansible-controller
-sudo apt update -y
-sudo apt install python3-pip -y
-pip3 install ansible==9.2.0 -y
-
-# Add ~/.local/bin to PATH if not already present
-if ! [[ ":$PATH:" == *":$HOME/.local/bin:"* ]]; then
-    export PATH="$PATH:$HOME/.local/bin"
-fi
-
-# Save the PATH update script to ~/update_path.sh
-cat <<EOT > ~/update_path.sh
-#!/bin/bash
-
-# Add ~/.local/bin to PATH if not already present
-if ! [[ ":$PATH:" == *":$HOME/.local/bin:"* ]]; then
-    export PATH="$PATH:$HOME/.local/bin"
-fi
-EOT
-
-# Make the PATH update script executable
-chmod +x ~/update_path.sh
-
-# Add reference to the PATH update script in ~/.bashrc
-echo "~/update_path.sh" >> ~/.bashrc
-
-# Run the PATH update script
-~/update_path.sh
 
 bash
+
+echo "Script completed successfully"
+
 
 ########## END  ############
 
