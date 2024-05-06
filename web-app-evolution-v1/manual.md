@@ -10,7 +10,7 @@ Automate Ec2 creation and install wordpress.
 
 # Advanced Demo - Web App - Single Server to Elastic Evolution
 
-![Stage1 - PNG](https://github.com/acantril/learn-cantrill-io-labs/blob/master/aws-elastic-wordpress-evolution/02_LABINSTRUCTIONS/STAGE1%20-%20SINGLE%20SERVER%20MANUAL.png)
+<!-- ![Stage1 - PNG](https://github.com/acantril/learn-cantrill-io-labs/blob/master/aws-elastic-wordpress-evolution/02_LABINSTRUCTIONS/STAGE1%20-%20SINGLE%20SERVER%20MANUAL.png) -->
 
 In stage 1 of this advanced demo you will:
 - Setup the environment which WordPress will run from. 
@@ -23,13 +23,13 @@ This is the starting point .. the common wordpress configuration which you will 
 
 Login to an AWS account using a user with admin privileges and ensure your region is set to `us-east-1` `N. Virginia`
 
-Click [HERE](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://learn-cantrill-labs.s3.amazonaws.com/aws-elastic-wordpress-evolution/A4LVPC.yaml&stackName=A4LVPC) to auto configure the VPC which WordPress will run from
+<!-- Click [HERE](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://learn-cantrill-labs.s3.amazonaws.com/aws-elastic-wordpress-evolution/A4LVPC.yaml&stackName=A4LVPC) to auto configure the VPC which WordPress will run from -->
 
 Wait for the STACK to move into the `CREATE_COMPLETE` state before continuing.
 
 # STAGE 1B - Create an EC2 Instance to run wordpress
 
-Move to the EC2 console https://console.aws.amazon.com/ec2/v2/home?region=us-east-1  
+<!-- Move to the EC2 console https://console.aws.amazon.com/ec2/v2/home?region=us-east-1   -->
 Click `Launch Instance`  
 
 For `name` use `Wordpress-Manual`  
@@ -60,7 +60,7 @@ _you can continue to stage 1B below while the instance is provisioning_
 Storing configuration information within the SSM Parameter store scales much better than attempting to script them in some way.
 In this sub-section you are going to create parameters to store the important configuration items for the platform you are building.  
 
-Open a new tab to https://console.aws.amazon.com/systems-manager/home?region=us-east-1  
+<!-- Open a new tab to https://console.aws.amazon.com/systems-manager/home?region=us-east-1   -->
 Click on `Parameter Store` on the menu on the left
 
 **MAKE SURE WITH THE BELOW ... NO WHITESPACE BEFORE OR AFTER .. MAKE SURE THE UPPER/LOWER CASE IS CORRECT**
@@ -222,7 +222,7 @@ sudo rm /tmp/db.setup
 
 ## Test Wordpress is installed
 
-Open the EC2 console https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=desc:tag:Name  
+<!-- Open the EC2 console https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=desc:tag:Name   -->
 Select the `Wordpress-Manual` instance  
 copy the `IPv4 Public IP` into your clipboard (**DON'T CLICK THE OPEN LINK ... just copy the IP**)
 Open that IP in a new tab  
