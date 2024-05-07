@@ -1,12 +1,35 @@
-AWS account creation questions.
+# Install WSL
+go to your search bar on your laptop and type powershell right click and select `run as administartor`
+copy and ppaste the below commands and wait for it to get to `100%` before you copy and paste the next command.
+1. 
+```bash
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+2.
+```bash
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
 
-IAM questions.
+3. 
 
-Ec2 creation and connection questions.
+```bash
+wsl.exe --install
+```
+4.
 
-VPC components questions.
+```bash
+wsl --set-default-version 2
+```
 
-Automate Ec2 creation and install wordpress.
+```bash
+wsl --install -d Ubuntu-20.04
+```
+
+reboot your system.
+
+Now launch visual studio code
+Click on ctrl tilder (~)
+Click on the drop down arrow on the right and select ubuntu wsl
 
 # Advanced Demo - Web App - Single Server to Elastic Evolution
 
