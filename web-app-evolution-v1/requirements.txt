@@ -1,0 +1,2 @@
+To follow along, you need to have git, terraform and awscli installed on your local machine.
+You need to set up your AWS `access keys` and s`ecret access keys`
