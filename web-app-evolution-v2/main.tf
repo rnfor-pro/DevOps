@@ -7,22 +7,6 @@ terraform {
   }
 }
 
-#vpc resource
-
-# resource "aws_vpc" "vpc" {
-
-#   cidr_block = var.vpccidr
-
-#   # cidr block iteration found in the terraform.tfvars file
-
-#   tags = {
-
-#     Name = "A4LVPC"
-
-#   }
-
-# }
-
 
 resource "aws_vpc" "vpc" {
   cidr_block                       = var.vpc_cidr_block
@@ -32,43 +16,6 @@ resource "aws_vpc" "vpc" {
     Name = "A4LVPC"
   }
 }
-
-
-
-#Elastic IP for NAT Gateway resource
-
-# resource "aws_eip" "nat" {
-#   domain = "vpc"
-
-#   tags = {
-
-#     Name = "vpc-arun"
-#   }
-
-# }
-
-
-
-
-
-#NAT Gateway object and attachment of the Elastic IP Address from above
-
-# resource "aws_nat_gateway" "ngw" {
-
-#   allocation_id = aws_eip.nat.id
-
-#   subnet_id = aws_subnet.pubsub1.id
-
-#   depends_on = [aws_internet_gateway.igw]
-
-#   tags = {
-
-#     Name = "A4L-nat-IGW"
-
-#   }
-# }
-
-
 
 
 #Internet Gateway
@@ -85,12 +32,18 @@ resource "aws_internet_gateway" "igw" {
 
 }
 
+# igw_attachment
+# resource "aws_internet_gateway_attachment" "igw_attachment" {
+#   vpc_id = aws_vpc.vpc.id
+#   internet_gateway_id = aws_internet_gateway.igw.id
+# }
+
 
 #Public Subnet 1
 
 resource "aws_subnet" "pubsub1" {
 
-  cidr_block = var.pubsub1cidr
+  cidr_block = var.snpubA
 
   # public subnet 1 cidr block iteration found in the terraform.tfvars file
 
@@ -114,7 +67,7 @@ resource "aws_subnet" "pubsub1" {
 
 resource "aws_subnet" "pubsub2" {
 
-  cidr_block = var.pubsub2cidr
+  cidr_block = var.snpubB
 
   # public subnet 2 cidr block iteration found in the terraform.tfvars file
 
@@ -139,7 +92,7 @@ resource "aws_subnet" "pubsub2" {
 
 resource "aws_subnet" "pubsub3" {
 
-  cidr_block = var.pubsub3cidr
+  cidr_block = var.snpubC
 
   # public subnet 3 cidr block iteration found in the terraform.tfvars file
 
@@ -223,7 +176,7 @@ resource "aws_route_table_association" "pubrtas3" {
 
 resource "aws_subnet" "prisub1" {
 
-  cidr_block = var.prisub1cidr
+  cidr_block = var.snappA
 
   # private subnet 1 cidr block iteration found in the terraform.tfvars file
 
@@ -247,7 +200,7 @@ resource "aws_subnet" "prisub1" {
 
 resource "aws_subnet" "prisub2" {
 
-  cidr_block = var.prisub2cidr
+  cidr_block = var.snappB
 
   # private subnet 2 cidr block iteration found in the terraform.tfvars file
 
@@ -270,7 +223,7 @@ resource "aws_subnet" "prisub2" {
 
 resource "aws_subnet" "prisub3" {
 
-  cidr_block = var.prisub3cidr
+  cidr_block = var.snappC
 
   # private subnet 3 cidr block iteration found in the terraform.tfvars file
 
@@ -288,32 +241,8 @@ resource "aws_subnet" "prisub3" {
 
 }
 
-
-
-#Private Subnet 4
-# resource "aws_subnet" "prisub4" {
-
-#   cidr_block = var.prisub4cidr
-
-#   # private subnet 4 cidr block iteration found in the terraform.tfvars file
-#   vpc_id = aws_vpc.vpc.id
-
-#   map_public_ip_on_launch = false
-
-#   availability_zone = data.aws_availability_zones.available.names[3]
-
-#   tags = {
-
-#     Name = "sn-db-A"
-
-#   }
-
-# }
-
-
-
-resource "aws_subnet" "sndba" {
-  vpc_id                          = aws_vpc.vpc.id
+resource "aws_subnet" "sndba" { 
+  vpc_id                          =  aws_vpc.vpc.id
   cidr_block                      = var.sndba
   availability_zone               = data.aws_availability_zones.available.names[0]
   assign_ipv6_address_on_creation = true
@@ -329,7 +258,7 @@ resource "aws_subnet" "sndba" {
 #Private Subnet 5
 resource "aws_subnet" "prisub5" {
 
-  cidr_block = var.prisub5cidr
+  cidr_block = var.sndbB
 
   # private subnet 5 cidr block iteration found in the terraform.tfvars file
   vpc_id = aws_vpc.vpc.id
@@ -349,7 +278,7 @@ resource "aws_subnet" "prisub5" {
 #Private Subnet 6
 resource "aws_subnet" "prisub6" {
 
-  cidr_block = var.prisub6cidr
+  cidr_block = var.sndbc
 
   # private subnet 6 cidr block iteration found in the terraform.tfvars file
   vpc_id = aws_vpc.vpc.id

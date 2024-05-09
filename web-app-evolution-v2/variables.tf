@@ -1,21 +1,22 @@
 
 variable "region" {}
+
 variable "vpc_cidr_block" {}
 
-variable "pubsub1cidr" {}
+variable "snpubA" {}
 
-variable "pubsub2cidr" {}
+variable "snpubB" {}
 
-variable "pubsub3cidr" {}
+variable "snpubC" {}
 
-variable "prisub1cidr" {}
+variable "snappA" {}
 
-variable "prisub2cidr" {}
+variable "snappB" {}
 
-variable "prisub3cidr" {}
+variable "snappC" {}
 
 variable "sndba" {}
 
-variable "prisub5cidr" {}
+variable "sndbB" {}
 
-variable "prisub6cidr" {}
+variable "sndbc" {}
