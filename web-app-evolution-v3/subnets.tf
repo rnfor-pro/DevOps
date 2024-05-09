@@ -1,6 +1,6 @@
 resource "aws_subnet" "sn_pub_a" {
   vpc_id                  = aws_vpc.a4l_vpc.id
-  cidr_block              = "10.16.48.0/20"
+  cidr_block              = var.snpubA
   availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
 
@@ -19,7 +19,7 @@ resource "aws_route_table_association" "rta_pub_a" {
 # subnet_public_b
 resource "aws_subnet" "sn_pub_b" {
   vpc_id                  = aws_vpc.a4l_vpc.id
-  cidr_block              = "10.16.112.0/20"
+  cidr_block              = var.snpubB
   availability_zone       = data.aws_availability_zones.available.names[1]
   map_public_ip_on_launch = true
 
@@ -37,7 +37,7 @@ resource "aws_route_table_association" "rta_pub_b" {
 
 resource "aws_subnet" "sn_pub_c" {
   vpc_id                  = aws_vpc.a4l_vpc.id
-  cidr_block              = "10.16.176.0/20"
+  cidr_block              = var.snpubC
   availability_zone       = data.aws_availability_zones.available.names[2]
   map_public_ip_on_launch = true
 
@@ -54,7 +54,7 @@ resource "aws_route_table_association" "rta_pub_c" {
 
 resource "aws_subnet" "sn_app_a" {
   vpc_id            = aws_vpc.a4l_vpc.id
-  cidr_block        = "10.16.32.0/20"
+  cidr_block        = var.snappA
   availability_zone = data.aws_availability_zones.available.names[0]
 
   tags = {
@@ -64,7 +64,7 @@ resource "aws_subnet" "sn_app_a" {
 
 resource "aws_subnet" "sn_app_b" {
   vpc_id            = aws_vpc.a4l_vpc.id
-  cidr_block        = "10.16.96.0/20"
+  cidr_block        = var.snappB
   availability_zone = data.aws_availability_zones.available.names[1]
 
   tags = {
@@ -74,7 +74,7 @@ resource "aws_subnet" "sn_app_b" {
 
 resource "aws_subnet" "sn_app_c" {
   vpc_id            = aws_vpc.a4l_vpc.id
-  cidr_block        = "10.16.160.0/20"
+  cidr_block        = var.snappC
   availability_zone = data.aws_availability_zones.available.names[2]
 
   tags = {
@@ -84,7 +84,7 @@ resource "aws_subnet" "sn_app_c" {
 
 resource "aws_subnet" "sn_db_a" {
   vpc_id            = aws_vpc.a4l_vpc.id
-  cidr_block        = "10.16.16.0/20"
+  cidr_block        = var.sndba
   availability_zone = data.aws_availability_zones.available.names[0]
 
   tags = {
@@ -94,7 +94,7 @@ resource "aws_subnet" "sn_db_a" {
 
 resource "aws_subnet" "sn_db_b" {
   vpc_id            = aws_vpc.a4l_vpc.id
-  cidr_block        = "10.16.80.0/20"
+  cidr_block        = var.sndbB
   availability_zone = data.aws_availability_zones.available.names[1]
 
   tags = {
@@ -105,7 +105,7 @@ resource "aws_subnet" "sn_db_b" {
 
 resource "aws_subnet" "sn_db_c" {
   vpc_id            = aws_vpc.a4l_vpc.id
-  cidr_block        = "10.16.144.0/20"
+  cidr_block        = var.sndbc
   availability_zone = data.aws_availability_zones.available.names[2]
 
   tags = {
