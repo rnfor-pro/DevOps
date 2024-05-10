@@ -14,7 +14,7 @@ Alreay done using terraform
 ## Network Settings
 Alreay done using terraform
 
-Note down the `fs-XXXXXXXX` or `DNS name` (either will work) once visible at the top of this screen, you will need it in the next step.  
+Note down the `fs-XXXXXXXX ` or `DNS name ` (either will work) once visible at the top of this screen, you will need it in the next step.  
 ---
 
 
@@ -95,8 +95,19 @@ Under `Data Type` select `text`
 Under `Value` enter the RDS endpoint endpoint you just copied  
 Click `Create Parameter`   -->
 
-Go back to your terraform code and locate `ssm_parameters`
-In the values field enter the RDS endpoint endpoint you just copied
+Go back to your terraform code, locate the `ssm parameters block and add the code block below `
+
+```hcl
+resource "aws_ssm_parameter" "file_system_id" {
+  name        = "/A4L/Wordpress/EFSFSID"
+  description = "Wordpress DBRoot Password"
+  type        = "SecureString"
+  value       = "fs-XXXXXXX"
+  key_id      = "alias/aws/ssm"  
+}
+```
+
+
 Run 
 ```hcl
 terraform apply -auto-approve
