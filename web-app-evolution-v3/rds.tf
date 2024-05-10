@@ -15,3 +15,17 @@
 #     Name = "WordpressDB"
 #   }
 # }
+
+# rds_subnet_group
+
+# resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
+#   name       = "wordpress-db-subnet-group"
+#   subnet_ids = [aws_subnet.sn_db_a.id, aws_subnet.sn_db_b.id, aws_subnet.sn_db_c.id]
+
+#   tags = {
+#     Name = "WordpressDBSubnetGroup"
+#   }
+# }
+
+
+
