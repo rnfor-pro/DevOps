@@ -16,10 +16,10 @@ resource "aws_launch_template" "wordpress_lt" {
     create_before_destroy = true
   }
 
-  #   tag_specifications {
-  #     resource_type = "instance"
-  #     tags = {
-  #       Name = "wordpress-LT"
-  #     }
-  #   }
+#   tag_specifications {
+#     resource_type = "instance"
+#     tags = {
+#       Name = "wordpress-LT"
+#     }
+#   }
 }
