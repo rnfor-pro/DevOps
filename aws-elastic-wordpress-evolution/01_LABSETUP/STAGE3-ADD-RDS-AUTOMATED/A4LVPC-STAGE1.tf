@@ -357,7 +357,7 @@ resource "aws_ssm_parameter" "db_endpoint" {
   name        = "/A4L/Wordpress/DBEndpoint"
   description = "Wordpress Endpoint Name"
   type        = "String"
-  value       = "localhost"
+  value       = "a4lwordpress.cdiaord7vlsf.us-east-1.rds.amazonaws.com"
   # #   lifecycle {
   # #     create_before_destroy = true  # Ensures zero downtime during resource replacement
   # #     prevent_destroy       = true  # Prevents accidental deletion

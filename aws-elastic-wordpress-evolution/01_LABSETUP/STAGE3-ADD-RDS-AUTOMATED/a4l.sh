@@ -19,10 +19,10 @@ dnf -y update
 
 dnf install wget php-mysqlnd httpd php-fpm php-mysqli mariadb105-server php-json php php-devel stress -y
 
-# systemctl enable httpd
-# systemctl enable mariadb
-# systemctl start httpd
-# systemctl start mariadb
+systemctl enable httpd
+systemctl enable mariadb
+systemctl start httpd
+systemctl start mariadb
 
 mysqladmin -u root password $DBRootPassword
 
@@ -45,10 +45,10 @@ chmod 2775 /var/www
 find /var/www -type d -exec chmod 2775 {} \;
 find /var/www -type f -exec chmod 0664 {} \;
 
-# echo "CREATE DATABASE $DBName;" >> /tmp/db.setup
-# echo "CREATE USER '$DBUser'@'localhost' IDENTIFIED BY '$DBPassword';" >> /tmp/db.setup
-# echo "GRANT ALL ON $DBName.* TO '$DBUser'@'localhost';" >> /tmp/db.setup
-# echo "FLUSH PRIVILEGES;" >> /tmp/db.setup
-# mysql -u root --password=$DBRootPassword < /tmp/db.setup
-# rm /tmp/db.setup
+echo "CREATE DATABASE $DBName;" >> /tmp/db.setup
+echo "CREATE USER '$DBUser'@'localhost' IDENTIFIED BY '$DBPassword';" >> /tmp/db.setup
+echo "GRANT ALL ON $DBName.* TO '$DBUser'@'localhost';" >> /tmp/db.setup
+echo "FLUSH PRIVILEGES;" >> /tmp/db.setup
+mysql -u root --password=$DBRootPassword < /tmp/db.setup
+rm /tmp/db.setup
 

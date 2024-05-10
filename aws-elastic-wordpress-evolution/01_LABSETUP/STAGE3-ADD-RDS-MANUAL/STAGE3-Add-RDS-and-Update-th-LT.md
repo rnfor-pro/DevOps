@@ -4,55 +4,66 @@
 
 In stage 3 you will be splitting out the database functionality from the EC2 instance .. running MariaDB to an RDS instance running the MySQL Engine.  
 This will allow the DB and Instance to scale independently, and will allow the data to be secure past the lifetime of the EC2 instance.  
+`Assumptions` The resouces created in stage2 has not been destroyed.
+---
 
 # STAGE 3A - Create RDS Subnet Group
-Alredy done using terraform
----
+
+A subnet group is what allows RDS to select from a range of subnets to put its databases inside  
+In this case you will give it a selection of 3 subnets sn-db-A / B and C  
+RDS can then decide freely which to use.  
+
+Move to the RDS Console https://console.aws.amazon.com/rds/home?region=us-east-1#  
+Click `Subnet Groups`  
+Click `Create DB Subnet Group`  
+Under `Name` enter `WordPressRDSSubNetGroup`  
+Under `Description` enter `RDS Subnet Group for WordPress`  
+Under `VPC` select `A4LVPC`  
+
+Under `Add subnets` 
+In `Availability Zones` select `us-east-1a` & `us-east-1b` & `us-east-1c`  
+Under `Subnets` check the box next to 
+
+- 10.16.16.0/20 (this is sn-db-A)
+- 10.16.80.0/20 (this is sn-db-B)
+- 10.16.144.0/20 (this is sn-db-C)
+
+Click `Create`  
 
 # STAGE 3B - Create RDS Instance
-Alredy done using terraform
----
 
-# STAGE 2D - Test
-*you will need to wait until the instance is running with 2/2 status checks before contuining*  
+In this sub stage of the demo, you are going to provision an RDS instance using the subnet group to control placement within the VPC.   
+Normally you would use multi-az for production, to keep costs low, for now you should use a single AZ as per the instructions below.  
 
-Open the EC2 console https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=desc:tag:Name  
-Select the `Wordpress-LT` instance  
-copy the `IPv4 Public IP` into your clipboard, don't click the link to open, this will use https and we want http, just copy the IP.   
-Open that IP in a new tab  
-You should see the WordPress welcome page  
+Click `Databases`  
+Click `Create Database`  
+Click `Standard Create`  
+Click `MySql`  
+Under `Version` select `MySQL 8.0.32`   
 
-## Perform Initial COnfiguration and make a post
+Scroll down and select `Free Tier` under templates
+_this ensures there will be no costs for the database but it will be single AZ only_
 
-in `Site Title` enter `Catagram`  
-in `Username` enter `admin`
-in `Password` enter `4n1m4l54L1f3`  
-in `Your Email` enter your email address  
-Click `Install WordPress`
-Click `Log In`  
-In `Username or Email Address` enter `admin`  
-in `Password` enter the previously noted down strong password 
-Click `Log In`  
+under `Db instance identifier` enter `a4lWordPress`
+under `Master Username` enter `a4lwordpressuser`  
+under `Master Password` and `Confirm Password` enter `4n1m4l54L1f3`   
 
-Click `Posts` in the menu on the left  
-Select `Hello World!` 
-Click `Bulk Actions` and select `Move to Trash`
-Click `Apply`  
+Under `DB Instance size`, then `DB instance class`, then `Burstable classes (includes t classes)` make sure db.t3.micro or db.t2.micro or db.t4g.micro is selected  
 
-Click `Add New`  
-If you see any popups close them down  
-For title `The Best Animal(s)!`  
-Click the `+` under the title, select  `Gallery` 
-Click `Upload`  
-Select some animal pictures.... if you don't have any use google images to download some  
-Upload them  
-Click `Publish`  
-Click `Publish`
-Click `view Post`  
+Scroll down, under `Connectivity`, `Compute resource` select `Don’t connect to an EC2 compute resource`  
+under `Connectivity`, `Network type` select `IPv4`  
+under `Connectivity`, `Virtual private cloud (VPC)` select `A4LVPC`  
+under `Subnet group` that `wordpressrdssubnetgroup` is selected  
+Make sure `Public Access` is set to `No`  
+Under `VPC security groups` make sure `choose existing` is selected, remove `default` and add `A4LVPC-SGDatabase`  
+Under `Availability Zone` set `us-east-1a`  
 
-This is your working, auto built WordPress instance
-** don't terminate the instance this time - we're going to migrate the database in stage 3**
+**IMPORTANT .. DON'T MISS THIS STEP**
+Scroll down past `Database Authentication` & `Monitoring` and expand `Additional configuration`  
+in the `Initial database name` box enter `a4lwordpressdb`  
+Scroll to the bottom and click `create Database`  
 
+** this will take anywhere up to 30 minutes to create ... it will need to be fully ready before you move to the next step - coffee time !!!! **
 
 # STAGE 3C - Migrate WordPress data from MariaDB to RDS
 
@@ -104,22 +115,14 @@ Move to the Parameter store https://console.aws.amazon.com/systems-manager/param
 Check the box next to `/A4L/Wordpress/DBEndpoint` and click `Delete` (please do delete this, not just edit the existing one)  
 Click `Create Parameter`  
 
-<!-- Under `Name` enter `/A4L/Wordpress/DBEndpoint`  
+Under `Name` enter `/A4L/Wordpress/DBEndpoint`  
 Under `Descripton` enter `WordPress DB Endpoint Name`  
 Under `Tier` select `Standard`    
 Under `Type` select `String`  
 Under `Data Type` select `text`  
 Under `Value` enter the RDS endpoint endpoint you just copied  
-Click `Create Parameter`   -->
+Click `Create Parameter`  
 
-Go back to your terraform code and locate `ssm_parameters`
-In the values field enter the RDS endpoint endpoint you just copied
-Run 
-```hcl
-terraform apply -auto-approve
-```
-
-Go back to `EC2 Console`
 Update the DbEndpoint environment variable with 
 
 ```
@@ -159,9 +162,9 @@ Open the IP in a new tab
 You should see the blog, working, even though MariaDB on the EC2 instance is stopped and disabled
 Its now running using RDS  
 
-# STAGE 3F - Update the LT so it doesnt install (Not required)
+# STAGE 3F - Update the LT so it doesnt install 
 
-<!-- Move to the EC2 Console https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:  
+Move to the EC2 Console https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:  
 Under `Instances` click `Launch Templates`  
 Select the `WordPress` launch Template (select, dont click)
 Click `Actions` and `Modify Template (Create new version)`  
@@ -169,18 +172,10 @@ This template version will be based on the existing version ... so many of the v
 Under `Template version description` enter `Single server App Only - RDS DB`
 
 Scroll down to `Advanced details` and expand it  
-Scroll down to `User Data` and expand the text box as much as possible -->
-
-<!-- 
-Click `Create Template Version`  
-Click `View Launch Template`  
-Select the template again (dont click)
-Click `Actions` and select `Set Default Version`  
-Under `Template version` select `2`  
-Click `Set as default version`   -->
+Scroll down to `User Data` and expand the text box as much as possible
 
 
-`In stage 4` locate and remove the following lines from userdata (a4l.sh)
+Locate and remove the following lines
 
 ```
 systemctl enable mariadb
@@ -197,6 +192,13 @@ rm /tmp/db.setup
 
 ```
 
+
+Click `Create Template Version`  
+Click `View Launch Template`  
+Select the template again (dont click)
+Click `Actions` and select `Set Default Version`  
+Under `Template version` select `2`  
+Click `Set as default version`  
 
 # STAGE 3 - FINISH  
 
