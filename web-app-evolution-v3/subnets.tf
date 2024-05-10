@@ -4,6 +4,12 @@ resource "aws_subnet" "sn_pub_a" {
   availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
 
+  # depends_on = [aws_instance.example]
+
+  lifecycle {
+    prevent_destroy = false
+  }
+
   tags = {
     Name = "sn-pub-A"
   }
@@ -23,6 +29,12 @@ resource "aws_subnet" "sn_pub_b" {
   availability_zone       = data.aws_availability_zones.available.names[1]
   map_public_ip_on_launch = true
 
+  # depends_on = [aws_instance.example]
+
+  lifecycle {
+    prevent_destroy = false
+  }
+
   tags = {
     Name = "sn-pub-B"
   }
@@ -41,6 +53,12 @@ resource "aws_subnet" "sn_pub_c" {
   availability_zone       = data.aws_availability_zones.available.names[2]
   map_public_ip_on_launch = true
 
+  # depends_on = [aws_instance.example]
+
+  lifecycle {
+    prevent_destroy = false
+  }
+
   tags = {
     Name = "sn-pub-C"
   }
@@ -56,6 +74,12 @@ resource "aws_subnet" "sn_app_a" {
   vpc_id            = aws_vpc.a4l_vpc.id
   cidr_block        = var.snappA
   availability_zone = data.aws_availability_zones.available.names[0]
+    
+  # depends_on = [aws_instance.example]
+
+  lifecycle {
+    prevent_destroy = false
+  }
 
   tags = {
     Name = "sn-app-A"
@@ -67,6 +91,12 @@ resource "aws_subnet" "sn_app_b" {
   cidr_block        = var.snappB
   availability_zone = data.aws_availability_zones.available.names[1]
 
+  # depends_on = [aws_instance.example]
+
+  lifecycle {
+    prevent_destroy = false
+  }
+
   tags = {
     Name = "sn-app-B"
   }
@@ -76,6 +106,12 @@ resource "aws_subnet" "sn_app_c" {
   vpc_id            = aws_vpc.a4l_vpc.id
   cidr_block        = var.snappC
   availability_zone = data.aws_availability_zones.available.names[2]
+
+  # depends_on = [aws_instance.example]
+
+  lifecycle {
+    prevent_destroy = false
+  }
 
   tags = {
     Name = "sn-app-C"

@@ -40,7 +40,7 @@ resource "aws_security_group" "sg_database" {
   }
 
   tags = {
-    Name = "SG-Database"
+    Name = "A4LVPC-SGDatabase"
   }
 }
 
@@ -91,6 +91,6 @@ resource "aws_security_group" "sg_efs" {
   }
 
   tags = {
-    Name = "SG-EFS"
+    Name = "A4LVPC-SGEFS"
   }
 }

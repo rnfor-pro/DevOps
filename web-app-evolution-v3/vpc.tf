@@ -7,3 +7,4 @@ resource "aws_vpc" "a4l_vpc" {
     Name = "A4LVPC"
   }
 }
+
