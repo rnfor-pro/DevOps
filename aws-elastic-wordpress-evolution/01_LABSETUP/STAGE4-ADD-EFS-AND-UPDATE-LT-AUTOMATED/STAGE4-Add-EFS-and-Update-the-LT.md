@@ -240,6 +240,7 @@ Find the line which says `dnf install wget php-mysqlnd httpd php-fpm php-mysqli 
 after `stress` add a space and paste in `amazon-efs-utils`  
 it should now look like `dnf install wget php-mysqlnd httpd php-fpm php-mysqli mariadb105-server php-json php php-devel stress amazon-efs-utils -y`  
 
+## DO NOT DO THIS NEXT STAGE.
 locate `systemctl start httpd` position cursor at the end & press enter twice to add new lines  
 
 paste in the following

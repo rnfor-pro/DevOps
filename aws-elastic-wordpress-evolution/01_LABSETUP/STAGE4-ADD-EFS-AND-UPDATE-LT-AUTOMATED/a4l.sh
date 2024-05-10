@@ -1,5 +1,9 @@
 #!/bin/bash -xe
 
+EFSFSID=$(aws ssm get-parameters --region us-east-1 --names /A4L/Wordpress/EFSFSID --query Parameters[0].Value)
+EFSFSID=`echo $EFSFSID | sed -e 's/^"//' -e 's/"$//'`
+
+
 DBPassword=$(aws ssm get-parameters --region us-east-1 --names /A4L/Wordpress/DBPassword --with-decryption --query Parameters[0].Value)
 DBPassword=`echo $DBPassword | sed -e 's/^"//' -e 's/"$//'`
 
@@ -17,7 +21,7 @@ DBEndpoint=`echo $DBEndpoint | sed -e 's/^"//' -e 's/"$//'`
 
 dnf -y update
 
-dnf install wget php-mysqlnd httpd php-fpm php-mysqli mariadb105-server php-json php php-devel stress -y
+dnf install wget php-mysqlnd httpd php-fpm php-mysqli mariadb105-server php-json php php-devel stress amazon-efs-utils -y
 
 systemctl enable httpd
 systemctl enable mariadb
