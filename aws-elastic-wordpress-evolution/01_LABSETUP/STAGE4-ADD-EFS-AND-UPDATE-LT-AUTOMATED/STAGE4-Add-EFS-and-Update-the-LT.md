@@ -98,12 +98,11 @@ Click `Create Parameter`   -->
 Go back to your terraform code, locate the `ssm parameters block and add the code block below `
 
 ```hcl
-resource "aws_ssm_parameter" "file_system_id" {
-  name        = "/A4L/Wordpress/EFSFSID"
-  description = "Wordpress DBRoot Password"
-  type        = "SecureString"
-  value       = "fs-XXXXXXX"
-  key_id      = "alias/aws/ssm"  
+resource "aws_ssm_parameter" "db_endpoint" {
+  name        = "/A4L/Wordpress/DBEndpoint"
+  description = "Wordpress Endpoint Name"
+  type        = "String"
+  value       = "a4lwordpress.cdiaord7vlsf.us-east-1.rds.amazonaws.com" 
 }
 ```
 
