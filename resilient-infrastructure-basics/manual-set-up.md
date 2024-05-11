@@ -207,10 +207,4 @@ To delete the setup without errors, follow these steps in reverse order, ensurin
 2. **Delete Load Balancer**: Wait for deregistration of instances.
 3. **Delete Target Group**: Ensure it's not associated with any services.
 4. **Delete Launch Template**: Make sure no dependencies.
-5. **Delete Security Group**: Ensure no dependencies.
-6. **Unassociate and Delete Route Table**: Remove associations with subnets first.
-7. **Detach and Delete Internet Gateway**: Detach from VPC first.
-8. **Delete Subnets**: Ensure no resources are using them.
 9. **Delete VPC**: Ensure all sub-resources are deleted.
-
-##end##
