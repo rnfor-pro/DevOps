@@ -114,8 +114,8 @@ This guide provides detailed instructions for setting up a scalable and accessib
       #!/bin/bash
       yum update -y
       yum install -y httpd.x86_64
-      systemctl start httpd.service
-      systemctl enable httpd.service
+      sudo systemctl start httpd.service
+      sudo systemctl enable httpd.service
       sudo echo "Hello team910 from $(hostname -f)" >> /var/www/html/index.html
 
    ```
