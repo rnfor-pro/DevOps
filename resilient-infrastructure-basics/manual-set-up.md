@@ -111,7 +111,9 @@ This guide provides detailed instructions for setting up a scalable and accessib
    - Scroll all the way down and in the box under `User data` eneter the below script.
 
    ```bash
+   
       #!/bin/bash
+
       sudo yum update -y
       sudo yum install -y httpd.x86_64
       sudo systemctl start httpd.service
