@@ -11,20 +11,29 @@ This guide provides detailed instructions for setting up a scalable and accessib
 1. **Navigate to VPC Dashboard**: Open the VPC console at https://console.aws.amazon.com/vpc/.
 2. **Create VPC**:
    - Click `Create VPC`.
-   - Set `Name tag` to `Custom-VPC`.
-   - Enter the `IPv4 CIDR block`, e.g., `10.0.0.0/16`.
-   - Check `Enable DNS hostname`.
-   - Click `Create`.
+   - Select `VPC and more`.
+   - Set `Name tag auto-generation` to `Custom`.
+   - Under `IPv4 CIDR block`, enter, `10.0.0.0/16`.
+   - Under `IPv6 CIDR block` check the `No IPv6 CIDR block`
+   - Click the dropdown arrow Under `Tenancy` check  `Default`
+   - Under `Number of Availability Zones (AZs)` select `3`
 
 ## STEP 2 - Create Subnets
 
 1. **Create three public subnets**:
-   - For each subnet (in `us-east-1a`, `us-east-1b`, `us-east-1c`):
-     - Click `Subnets` > `Create subnet`.
-     - Set `Name tag`, e.g., `Public-Subnet-1a`.
-     - Select `Custom-VPC`.
-     - Set the `IPv4 CIDR block`, e.g., `10.0.1.0/24` for `us-east-1a`.
-     - Click `Create`.
+   #- For each subnet (in `us-east-1a`, `us-east-1b`, `us-east-1c`):
+
+   - Under `Number of public subnets` select `3`
+   - Under `Number of private subnets` select `0`
+   - Click the dropdown arrow under `Customize subnets CIDR blocks`.
+   - Under `Public subnet CIDR block in us-east-1a` enter `10.0.1.0/24`
+   - Under `Public subnet CIDR block in us-east-1b` enter `10.0.2.0/24`
+   - Under `Public subnet CIDR block in us-east-1c` enter `10.0.3.0/24`
+   - Under `NAT gateways ($)` select `None`
+   - Under `VPC endpoints` select `None`
+   - Check boxes under  `DNS options`
+   - Click `Create VPC`.
+   
 
 ## STEP 3 - Set Up an Internet Gateway
 
