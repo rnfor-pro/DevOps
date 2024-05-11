@@ -110,8 +110,11 @@ This guide provides detailed instructions for setting up a scalable and accessib
    - Scroll all the way down and click on the drop down arrow on `Advanced details`
    - Scroll all the way down and in the box under `User data` eneter the below script.
 
-   ```bash
-   
+## Userdata
+
+## Amazon Linux
+   <!-- ```bash
+
       #!/bin/bash
 
       sudo yum update -y
@@ -120,7 +123,19 @@ This guide provides detailed instructions for setting up a scalable and accessib
       sudo systemctl enable httpd.service
       sudo echo "Hello team910 from $(hostname -f)" >> /var/www/html/index.html
 
+   ``` -->
+
+
+   ## Ubuntu
+
+   ```bash
+   #!/bin/bash
+
+      sudo apt update -y
+      sudo apt install apache2 -y
+
    ```
+
    - Click `Create launch template`.
 
 
