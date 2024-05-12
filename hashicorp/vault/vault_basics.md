@@ -140,11 +140,11 @@ Api Address: http://127.0.0.1:8200
 Cluster Address: https://127.0.0.1:8201
 Storage: inmem
 Version: Vault v1.15.5, built 2024-01-26T14:53:40Z
-Version Sha: 0d8b67ef63815f20421c11fe9152d435af3403e6
+Version Sha: xxxxxxxxx
 $ export VAULT_ADDR='http://127.0.0.1:8200'
-Unseal Key: WxqNwfS24c5EkYhPoc4l3f28cXGPs+Z5wlSqxk7qE9M=
-Root Token: hvs.QSnAPBuzbjRhthYMS9juPN8X
-$ export VAULT_TOKEN='hvs.QSnAPBuzbjRhthYMS9juPN8X'
+Unseal Key: xxxxxxxxx
+Root Token: hvs.xxxxxxxxx
+$ export VAULT_TOKEN='hvs.xxxxxxxxx'
 
 
 In this section we will talk about three operations - 
@@ -216,8 +216,8 @@ $ vault secrets list
 
 3. Write AWS root config inside your hashicorp vault
 $ vault write aws/config/root \
-access_key=AKIASR6MHZNGAXB6EHNW \
-secret_key=2RDWF8KpiiY/dUcKh8tAofzaKmLxib8ywq93pk08 \
+access_key=xxxxxxxxx \
+secret_key=xxxxxxxxx \
 region=us-west-2
 
 4. Setup role 
@@ -378,6 +378,7 @@ $ vault auth disable github
 
 
 In this section we are gonna take look on Deployment of Vault along with UI as well as HTTP API. Here are the list of topic we are gonna cover - 
+
 1. How to deploy vault in production
 2. Create config.hcl for vault's storage, listner, api_address, cluster and UI
 3. Starting the Vault server with server config
@@ -421,20 +422,24 @@ $ vault operator init
 7. Unseal vault
 $ vault operator unseal
 
-Unseal Key 1: H5ffOUCsmc1gGbb9B5lLBoIA05t2W1HGwWUqODv/wYRK
-Unseal Key 2: rHG7sEa8Nr8xYVQFZ0TP32R27cWKiP2HCn2gFyHjzvi3
-Unseal Key 3: z6VCcIpcsCfNymigW8TGJVXROdLqUWeGBOwrKlMVICT5
-Unseal Key 4: IdScXIyWNU4FlHtl+hEE4XBX1bVQs/mqXTYZNXHwNVQI
-Unseal Key 5: +zCvnrdLw3UGvFp0/NFRrNeAunB06G6LPLe7qCIDhgsZ
+Unseal Key 1: xxxxxxxxx
+Unseal Key 2: xxxxxxxxx
+Unseal Key 3: xxxxxxxxx
+Unseal Key 4: xxxxxxxxx
+Unseal Key 5: xxxxxxxxx
 
-Initial Root Token: hvs.lIWG8L0xE8oVK4y9B4PuIMve
+Initial Root Token: hvs.xxxxxxxxx
 
 
 
 
 Vault demo youtube: https://www.youtube.com/watch?v=BI8ZlflTWfs
+
 repo: https://github.com/joatmon08/getting-into-vault/tree/main/configure
-architecture: https://developer.hashicorp.com/vault/docs/internals/architecture  
+
+architecture: https://developer.hashicorp.com/vault/docs/internals/architecture 
+
 installation: https://developer.hashicorp.com/vault/docs/configuration
+
 cert: openssl -new newkey -x509 -keyout vault.key -sha256 -days 365 -nodes -out vault.crt
 
