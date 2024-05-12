@@ -1,0 +1,261 @@
+<mxfile host="Electron" modified="2024-03-09T12:53:18.135Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.21 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="l0cIlQlZLzhSzXB_ASvj" version="22.1.21" type="device">
+  <diagram name="Page-1" id="qbEAtm0k8UjGN2HfTZMQ">
+    <mxGraphModel dx="2204" dy="1954" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iuq-QJiE-TKBJO41Dl9V-1" value="&lt;b&gt;&lt;font style=&quot;font-size: 48px;&quot;&gt;VAULT&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-85" y="-90" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-1" target="E26fafyedkcv6tufK5eg-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-1" value="" style="triangle;whiteSpace=wrap;html=1;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="-50" width="110" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-25" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-3" value="When we talk about vault the problem we are really&amp;nbsp; talking about solving is the secret management problem,&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-115" y="110" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-4" value="When we talk about secret, the first thing that usually come in mind is, what is a secret?&amp;nbsp;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="310" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.036;entryY=0.454;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-6" target="E26fafyedkcv6tufK5eg-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="-40" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="201" y="555" />
+              <mxPoint x="201" y="-40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-6" value="When&amp;nbsp; we talk about secret management we are talking about managing a set of different credentials.&amp;nbsp;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="1">
+          <mxGeometry x="-85" y="490" width="130" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-4" target="E26fafyedkcv6tufK5eg-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-10" target="E26fafyedkcv6tufK5eg-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-10" value="Credentials is anything&lt;br&gt;&amp;nbsp;that can grant you &lt;br&gt;AUTHENTICATION &lt;br&gt;to a system or &lt;br&gt;AUTHORIZATION to a system." style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="-130" width="230" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="460" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-13" value="Examples include &lt;br&gt;username &amp;amp; password,&lt;br&gt;Db creds&lt;br&gt;API tokens or TLS certs.&lt;br&gt;We can use these things &lt;br&gt;to either log in to the &lt;br&gt;system and authenticate&lt;br&gt;or we are using it to prove &lt;br&gt;our identity such as TLS certificate&amp;nbsp;&lt;br&gt;so we are using it to authorize&lt;br&gt;access to a system.&amp;nbsp;&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="140" width="230" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-15" value="All these fall &lt;br&gt;in the realm &lt;br&gt;of secrets and &lt;br&gt;we want to &lt;br&gt;carefully &lt;br&gt;manage them" style="triangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="425" y="410" width="135" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-16" target="E26fafyedkcv6tufK5eg-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="-40" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="681" y="655" />
+              <mxPoint x="681" y="-36" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-16" value="We want to know who has access to them,&lt;br&gt;who used them&lt;br&gt;and we want to periodically&amp;nbsp;&lt;br&gt;rotate them" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="600" width="150" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="600" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="493" y="580" />
+              <mxPoint x="500" y="580" />
+              <mxPoint x="500" y="597" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-18" target="E26fafyedkcv6tufK5eg-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="900" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-18" value="Taking a closer look &lt;br&gt;at how these things are managed, what we &lt;br&gt;see is secret sprawl.&lt;br&gt;What we mean by secret &lt;br&gt;sprawl is that these end up everywhere.&lt;br&gt;&amp;nbsp;&lt;br&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="810" y="-80" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-20" value="They are in plain text in our source code, maybe hardcoded in the header&lt;br&gt;They end up in configuration&lt;br&gt;management system like&lt;br&gt;Ansible, chef etc.&lt;br&gt;So at the end of the day they end up in VCS like github, gitlab etc and everyone can log in and see them." style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="800" y="110" width="170" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-22" value="The challenge is that we don&#39;t even know who has access to these things, like who logged into github and saw what our DB creds are.&lt;br&gt;Even if they saw it we don’t know if they accessed them we don’t have any audit trail of who accessed them what they did with it.&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="810" y="370" width="190" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-24" value="Another issue is secret rotation, how do we effectively rotate these secrets even if we know someone had access to it how do we periodically rotate them." style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="840" y="560" width="170" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.418;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-22" target="E26fafyedkcv6tufK5eg-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-26" value="&lt;b&gt;&lt;font style=&quot;font-size: 48px;&quot;&gt;Problem&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="395" y="-280" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-27" value="&lt;b&gt;&lt;font style=&quot;font-size: 72px;&quot;&gt;Solution&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="395" y="810" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-28">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="1240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-28" value="This is where Vault came in.&lt;br&gt;He looked at the secret sprawl problem and said we can only solve it by centralizing it.&amp;nbsp;&lt;br&gt;and on top of that I am going to encrypt it&lt;br&gt;both at rest and in transit between vault and any system that wants to access it.&lt;br&gt;By so doing no one has implicit access to be able to see them.&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="910" width="230" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-29" value="The next thing is vault let&#39;s &lt;br&gt;us overlay fine grained access &lt;br&gt;control (ACL) on top of all these.&lt;br&gt;We can say the DB has access to&amp;nbsp;&lt;br&gt;database creds, the webserver need access to the API tokens, &lt;br&gt;everyone should not have access to everything.&lt;br&gt;On top of that we have an audit trail we can see what &lt;br&gt;creds our webserv accessWhat creds each engineer accessed&lt;br&gt;hence we have a clear visibility and control &lt;br&gt;over how our creds are being managed.&lt;br&gt;&lt;br&gt;That is the first problem Vault resolves.&amp;nbsp;&lt;br&gt;From sprawl to a centraalize location for our secrets, &lt;br&gt;then controlling access to those secrets&lt;br&gt;and giing us an audit trail of who accessed it.&lt;br&gt;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="1250" width="340" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-31">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="1000" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="381" y="1625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-31" value="The next challenge is who we are giving those credentials to&lt;br&gt;1. our creds are centralized, encrypted and ACL applied.&lt;br&gt;Now applications needs to access and use these credentials.&lt;br&gt;And we all know that applications do a terrible job of keeping secrets, inevitably applications will log it&#39;s creds out to a logging system, or stdout they get shipped out to a logging tool like splunk and finally in the central logging system where everyone can see&amp;nbsp;&lt;br&gt;The application might have an exception and show this in the error report where everyone can see.&lt;br&gt;So the app isn&#39;t trusted because even if we do a great job by centralizing and encrypting these creds apps might still leak them out." style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="1530" width="360" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="1250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-32" value="So one of the second level of capability vault introduces is what we call dynamic secrets.&amp;nbsp;&lt;br&gt;The idea behind it is that instead of providing long lived creds to application that is going to end up being leaked&lt;br&gt;we provide short lived creds (dynamic secrets).&lt;br&gt;We might give a secret to an application that is only valid for 30 days.&lt;br&gt;So even an application logs the credentials out to a logging system and an attacker sees it we create a moving target for them by constantly moving those credentials&lt;br&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="455" y="885" width="260" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-35" value="Another thing that is valuable is that each credential is unique to each client, unlike before with static credentials where we have a static username and password for our DB and multiple webservers use it and if that credentials ever get compromised it become difficult to pinpoint where it did because they are multiple webservers reading it &lt;br&gt;But with dynamic secrets, each web server has a unique secret so if something happens you know exactly what was the point of compromise." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="1260" width="270" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-37">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="1100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-37" value="The last advantage is that we have a much&amp;nbsp;&lt;br&gt;better revocation story, if we know what machine&lt;br&gt;got compromised we can easily revoke user name and password for just that machine and isolate that leak. But if all 50 machines are using the same username and password and it get leaked it becomes difficult to revoke because we are going to cause the entire system to have an outage. The blast radius is really going to be large with a shared secret." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="1">
+          <mxGeometry x="500" y="1550" width="260" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=115;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-35" target="E26fafyedkcv6tufK5eg-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-39" value="Vault provide a service called encryption as a service. This gives developers a set of high secure building blocks that can be used to&lt;br&gt;encrypt, decrypt and process sensitive&amp;nbsp; customer data.&lt;br&gt;&lt;br&gt;It enables the security teams to fortify data during transit and at rest.&lt;br&gt;&lt;br&gt;Splunk integrate with vault to give you out of the box monitoring of performance, total number of leases, revocation rate, who created a secret, how many are created within an hour, where they are being used etc." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="880" width="380" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-41" value="CORE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="2130" width="240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-42" value="&lt;b&gt;&lt;font style=&quot;font-size: 72px;&quot;&gt;Architecture&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="1960" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-43" value="Authentication&lt;br&gt;Back-end&lt;br&gt;To&lt;br&gt;Allows clients to&lt;br&gt;authenticate from different systems&lt;br&gt;using plugins." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="2130" width="100" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-44">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="2230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-44" value="- AWS to auth aws services&lt;br&gt;- LDAP/AD to auth human users&lt;br&gt;- K8S (make use of high level auth provider)&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="2115" width="175" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-46" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;authentication clients&lt;br&gt;used to provide human identity&lt;br&gt;(provide the identity of the caller)&amp;nbsp;&lt;br&gt;&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-65" y="2055" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-47" value="AUDITING&lt;br&gt;&lt;br&gt;We use the identity of these callers to connect to an auditing backend&lt;br&gt;WHICH&amp;nbsp; allows us to connect and stream out request response auditing to an external system like splunk" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="302.5" y="2340" width="275" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-48" value="SPLUNK / Syslog&lt;br&gt;&lt;br&gt;Gives us a trail of who has done what." style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="420" y="2550" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-47" target="E26fafyedkcv6tufK5eg-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-51" target="E26fafyedkcv6tufK5eg-53">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="610" y="2080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-51" value="STORAGE BACKENDS&lt;br&gt;&lt;br&gt;It stores Vault&#39;s data at rest.&amp;nbsp;&lt;br&gt;examples of storage backends to provide durable storage in a highly available way&lt;br&gt;so we can tolerate the lost of one of the back-end systems" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="2020" width="230" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-53" value="RDMS&lt;br&gt;Consul&lt;br&gt;Spanner" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="570" y="2030" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-54" value="SECRET BACKE-ENDS&lt;br&gt;to enable the dynamic secret capabilities.&lt;br&gt;&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="577.5" y="2130" width="132.5" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-55" value="DB plugins to dynamically manage DB creds for dbs like MYSQL, PostgresQL, ORACLE etc" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="2180" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-56" value="Key Value" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="2130" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-57" value="RabbitMQ&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="2230" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-58" value="AWS maybe we have an app that reads from S3&amp;nbsp; but we do not want to give them long lived access to IAM instead we define a role in our AWS back-end, then go and dynamically generate short lived creds as needed. so this extends the dynamic secret paradigm." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="2280" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-59" value="PKI" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="2430" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-60" value="GCP, AZURE etc" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="2380" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-61" value="SSH" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="2480" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-62" value="&lt;b&gt;X3 instances for HA&lt;br&gt;&lt;br&gt;Shared back-end e.g&amp;nbsp;&lt;br&gt;Consul&lt;br&gt;&lt;/b&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="470" y="2960" width="140" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-63" value="&lt;b&gt;&lt;font style=&quot;font-size: 72px;&quot;&gt;Deploying Vault at scale for HA&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-85" y="2810" width="1190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-66" value="" style="triangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="3220" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-68" value="" style="triangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="715" y="3220" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-69" value="" style="triangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="3230" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-71" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.145;entryY=1;entryDx=0;entryDy=-4.35;entryPerimeter=0;" edge="1" parent="1" target="E26fafyedkcv6tufK5eg-62">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="3230" as="sourcePoint" />
+            <mxPoint x="430" y="3180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-72" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.786;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="E26fafyedkcv6tufK5eg-62">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="3214.35" as="sourcePoint" />
+            <mxPoint x="820" y="3070.35" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-73" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="E26fafyedkcv6tufK5eg-69">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="3210" as="sourcePoint" />
+            <mxPoint x="540" y="3100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E26fafyedkcv6tufK5eg-75" value="Multiple vault instances coordinate with the shared backe-end to perform leader election if one goes down any. Any request sent is redirected to the master." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="3300" width="460" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

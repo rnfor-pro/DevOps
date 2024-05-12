@@ -1,0 +1,1474 @@
+Question 1
+How do you create a workspace?
+
+terraform workspace branch
+
+there is no such command
+
+terraform workspace add
+
+there is no such command
+
+terraform workspace create
+
+
+there is no such command
+
+terraform workspace new *
+
+The terraform workspace new command is used to create a new workspace.
+
+$ terraform workspace new example
+Created and switched to workspace "example"!
+
+You're now on a new, empty workspace. Workspaces isolate their state,
+so if you run "terraform plan" Terraform will not see any existing state
+for this configuration.
+https://www.terraform.io/docs/cli/commands/workspace/new.html
+======
+
+Question 2
+The Terraform Registry can search based on the following search terms
+
+name *
+
+version
+
+description *
+
+provider *
+
+
+source
+
+EXPLANATION
+Every page on the registry has a search field for finding modules. Enter any type of module you're looking for (examples: "vault", "vpc", "database"), and the resulting modules will be listed.
+
+The search query will look at module name, provider, and description to match your search terms. On the results page, filters can be used to further refine search results.
+
+https://www.terraform.io/docs/registry/modules/use.html#finding-modules
+======
+Question 3
+
+select the correct answer
+
+Which Terraform Workflow ( Write -> Plan -> Create ) does this describe?
+
+The project resides in a repo, and the backend is configured to use Terraform Cloud
+Pull requests are submitted to the repo with new changes
+When the Pull Request is approved, Terraform Cloud runs terraform apply
+Individual Practitioner Workflow
+
+The "Individual Practitioner Workflow" typically describes a scenario where a single person is working with Terraform without much emphasis on collaboration or using cloud-based infrastructure. It's not a good fit for the scenario described.
+
+Team Workflow
+
+
+The "Team Workflow" generally involves collaboration among team members but does not specifically mention the use of Terraform Cloud or remote state management. It's not specific enough to match the described scenario.
+
+Core Workflow Enhanced
+
+This workflow involves using Terraform Cloud for remote state management, collaboration, and automation. It aligns with the described scenario where the project is in a repo, pull requests are submitted for changes, and Terraform Cloud is used for applying changes.
+
+The Core Workflow Enhanced *
+
+===========
+
+Question 4
+When we want the most verbose information from terraform logging what severity should we set?
+
+TRACE *
+
+WARN
+
+INFO
+
+DEBUG
+
+ERROR
+
+EXPLANATION
+https://www.terraform.io/docs/internals/debugging.html
+
+You can set TF_LOG to one of the log levels TRACE, DEBUG, INFO, WARN, or ERROR to change the verbosity of the logs.
+
+https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+
+Trace - Only when I would be "tracing" the code and trying to find one part of a function specifically. 
+Debug - Information that is diagnostically helpful to people more than just developers (IT, sysadmins, etc.).
+Info - Generally useful information to log (service start/stop, configuration assumptions, etc). Info I want to always have available but usually don't care about under normal circumstances. This is my out-of-the-box config level.
+Warn - Anything that can potentially cause application oddities, but for which I am automatically recovering. (Such as switching from a primary to backup server, retrying an operation, missing secondary data, etc.)
+Error - Any error which is fatal to the operation, but not the service or application (can't open a required file, missing data, etc.). These errors will force user (administrator, or direct user) intervention. These are usually reserved (in my apps) for incorrect connection strings, missing services, etc.
+
+===========
+
+Question 5
+Which is NOT a valid argument for remote-exec?
+
+script
+
+scripts
+
+inline
+
+interpreter *
+
+interpreter is an argument available to local-exec:
+
+EXPLANATION
+The following arguments are supported:
+
+inline - This is a list of command strings. They are executed in the order they are provided. This cannot be provided with script or scripts.
+
+script - This is a path (relative or absolute) to a local script that will be copied to the remote resource and then executed. This cannot be provided with inline or scripts.
+
+scripts - This is a list of paths (relative or absolute) to local scripts that will be copied to the remote resource and then executed. They are executed in the order they are provided. This cannot be provided with inline or script.
+
+https://www.terraform.io/docs/language/resources/provisioners/remote-exec.html
+
+===========
+
+Question 6
+What best describes Infrastructure as Code (IaC)?
+
+The deployment of applications onto cloud resources
+
+deployment is when you deploy a version of an application to provisioned resources. You can do this via IaC but its only part of what IaC can do. IaC would be used to setup CI/CD which would handle deployment
+
+Infrastructure that is automated via the CLI
+
+You can use a CLI to execute an IaC tool, but automation could also occur via a git workflow on pull request.
+
+Infrastructure that is automated via a cloud console
+
+A cloud console, portal, is a web UI to interact with cloud services via the manual process of clicking a mouse. This would be consider ClickOps and the opposite of IaC
+
+Infrastructure is defined as configuration scripts.
+
+EXPLANATION
+Infrastructure as Code is when you define your code in a configuration file, and that configuration file is than used by a development tool to execute API commands to cloud services or a provider.
+
+===========
+
+
+
+Question 7
+How does Terraform Cloud backup states?
+
+Terraform Cloud requires you to turn on Consul which will store terraform.tfstate.backup in Consul KV store
+
+Consul does have a KV store, and you can have Consul KV store setup a standard backend, but not in combination with Terraform Cloud.
+
+Terraform Cloud does not store a backup of your terraform.tfstate.backup. This file will be generated on the local machine running Terraform command.
+
+Terraform Cloud requires you to turn on Sentinel which will store terraform.tfstate.backup in Sentinel's KV store
+
+Sentinel does not have a KV store
+
+Terraform Cloud saves a history of state files every time you perform a run*
+
+
+https://www.terraform.io/docs/language/state/index.html
+======
+
+Question 8
+Is this a valid configuration for remote-exec?
+
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+   interpreter = ["bash", "-e"]
+  }
+}
+
+True
+
+False*
+
+EXPLANATION
+interpreter is not a valid argument for remote-exec. local-exec does have a valid argument called interpreter
+
+https://www.terraform.io/docs/language/resources/provisioners/remote-exec.html#argument-reference
+
+===============
+Question 9
+The Terraform Registry contains both public and private providers and modules
+
+True
+
+False*
+
+EXPLANATION
+The Terraform Registry only contains public providers and modules.
+
+https://www.terraform.io/docs/registry/private.html
+
+
+==============
+
+Question 10
+Which sources does Terraform modules NOT support?
+
+Bitbucket
+
+https://www.terraform.io/docs/language/modules/sources.html#bitbucket
+
+FTP*
+
+local paths
+
+https://www.terraform.io/docs/language/modules/sources.html#local-paths
+
+Github
+
+https://www.terraform.io/docs/language/modules/sources.html#github
+
+Terraform Registry
+
+https://www.terraform.io/docs/language/modules/sources.html#terraform-registry
+
+Generic Git Repository
+
+https://www.terraform.io/docs/language/modules/sources.html#generic-git-repository
+
+==============
+
+Question 11
+What HashiCorp service can be used alongside Terraform to inject secrets to protect a developer's local enviroment.
+
+Consul
+
+Consul is a mesh service. Its not related to security
+
+Boundary
+
+Boundary is a security service by HashiCorp to allow identity-based access that is platform agnostic. Like gaining access to a VM. It does do anything relating to accessing secrets.
+
+Sentinel
+
+Sentinel is for Policy as Code. It features Terraform and is not a standalone service.
+
+Vault*
+
+Vault allows you to centralized the management of secrets from various secrets repositories. You can use Vault to pull sensitive credentials at the time of terraform apply.
+
+EXPLANATION
+This tutorial on HashiCorp Learn shows how to use secrets. https://learn.hashicorp.com/tutorials/terraform/secrets-vault?in=terraform/security
+
+=============
+
+Question 12
+A DevOps Engineer needs to reference an existing AMI (machine image) for an AWS Virtual machine called example.
+
+resource "aws_instance" "example" {
+  ami           = "ami-abc123"
+  instance_type = "t2.micro"
+
+  ebs_block_device {
+    device_name = "sda2"
+    volume_size = 16
+  }
+  ebs_block_device {
+    device_name = "sda3"
+    volume_size = 20
+  }
+}
+What would be the correct resource address to assign this AMI to another virtual machine?
+
+
+resource "aws_instance" "example2" {
+  ami = aws_instance.example.arn
+arn is not required here.
+
+
+resource "aws_instance" "example2" {
+  ami = aws_instance.example.ami.id
+If you are using the aws_ami data source, then we can use id, which would be
+
+ami = data.aws_ami.example.id
+
+
+*resource "aws_instance" "example2" {
+  ami = aws_instance.example.ami
+This is correct because we are referencing the resource block
+=======
+
+Question 13
+Does Terraform have built-in IP Network functions like 'calculates a subnet address within a given IP network address prefix'?
+
+> cidrsubnet("172.16.0.0/12", 4, 2)
+172.18.0.0/16
+No, this requires the IP Network module
+
+The Terraform language does not support user-defined functions
+
+https://www.terraform.io/docs/language/functions/index.html
+
+Yes, these are functions built into the Terraform langauge.
+
+Yes, Terraform has built-in functions IP Network functions*
+
+https://www.terraform.io/docs/language/functions/cidrsubnet.html
+
+===========
+Question 14
+What type of backend is this Terraform configuration file using?
+
+terraform {
+}
+
+provider "aws" {
+  region = "us-east-1"
+  profile = "sandbox"
+}
+
+resource "aws_instance" "my_example_server" {
+  ami           = "ami-0c2b8ca1dad447f8a"
+  instance_type = "t2.nano"
+  tags = {
+    Name = "MyExampleServer"
+  }
+}
+It will use the local backend or whatever is stored in the .terraform.defaults file.
+
+There is no such thing ias the terraform.defaults file.
+
+The backend will use Amazon S3 because the AWS provider is defined
+
+This is not true. To use a standard backend, it must be defined
+
+It will result in an error because it does not specify a backend in the terraform settings block
+
+This is not true. Defining no backend will use the local backend by default.
+
+
+It is using the local backend.*
+
+This is true, by default this will be used.
+
+========
+
+Question 15
+How can you quickly start using Sentinel with Terraform Cloud?
+
+Use Terraform Cloud's native policy library, which automatically includes Sentinel policies for common best practices
+
+Terraform Cloud does provide a set of predefined policies based on best practices, but these are not automatically enforced. You would still need to enable Sentinel and choose which policies to enforce within your organization.
+
+Download the Sentinel plugin for Terraform CLI and configure it to enforce policies during Terraform runs
+
+While the Sentinel plugin for Terraform CLI allows you to enforce policies during Terraform runs on your local machine, it is not directly related to Terraform Cloud. The question specifically asks about using Sentinel with Terraform Cloud.
+
+Install Sentinel as a separate tool on your local machine and manually link it to your Terraform Cloud workspace
+
+While Sentinel can be installed and used as a separate tool, this option is not the quickest way to start using Sentinel with Terraform Cloud. Using Sentinel directly within Terraform Cloud's UI eliminates the need for manual configuration and integration.
+
+Enable Sentinel in Terraform Cloud's organization settings and write Sentinel policies in the Terraform Cloud UI*
+
+This is the correct answer. Sentinel can be enabled at the organization level in Terraform Cloud, allowing you to define and manage policies directly within the Terraform Cloud UI. You can write Sentinel policies using the Sentinel language, which is specifically designed for policy enforcement in Terraform configurations.
+
+============
+Question 16
+terraform apply ______ will apply changes without requiring user confirmation.
+
+-force
+
+There is no -force flag
+
+All of the options
+
+-approve
+
+There is no -approve flag
+
+-auto-approve
+
+SELECTED
+-auto-approve - Skips interactive approval of plan before applying. This option is ignored when you pass a previously-saved plan file, because Terraform considers you passing the plan file as the approval and so will never prompt in that case.
+
+https://www.terraform.io/docs/cli/commands/apply.html#apply-options
+==============
+
+Question 17
+The following is a valid configuration for a provider?
+
+terraform {
+  providers{
+    aws = {
+      source = "hashicorp/aws"
+      version = "3.58.0"
+    }
+  }
+}
+
+provider "aws" {
+  # Configuration options
+}
+
+True
+
+False*
+
+
+
+Each Terraform module must declare which providers it requires, so that Terraform can install and use them. Provider requirements are declared in a required_providers block.
+
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "3.58.0"
+    }
+  }
+}
+
+provider "aws" {
+  # Configuration options
+}
+https://www.terraform.io/docs/language/providers/requirements.html#requiring-providers
+
+===========
+
+Question 18
+A junior developer has been tasked to delete a virtual machine on Azure. Due to miscommunication, they deleted the VM via the Azure Console instead of modifying the terraform configuration file.
+
+How can we update our state file so it does not create a new instance on the next terraform apply?
+
+terraform apply -refresh-only*
+
+-refresh-only will update the state file. So that it reflects the actual state of the provider.
+
+https://www.terraform.io/docs/cli/commands/refresh.html
+
+This is useful when someone has made manual changes via a cloud provider's portal/console and you want to reflect those changes in your state file instead of recreating or modifying the existing infrastructure.
+
+terraform state mv
+
+State mv is when you need to move a resource from one module to another, or having to do with the movement of a resource.
+
+terraform apply (terraform will automatically correct by default)
+
+This is not true. Terraform will see that the VM is missing and think you want it back up, and will launch a new instance.
+
+terraform apply -replace
+
+Replace is used to force a replacement of resource if it has been degraded or damaged. This would cause the VM to launch again.
+
+terraform destroy
+
+This would destroy your entire stack. Dangerous and plain wrong.
+
+EXPLANATION
+terraform refresh and `terraform apply -refresh-only -auto-approve are the same.
+
+terraform refresh is depreciated but if you get a question on terraform refesh, apply the logic found here.
+
+============
+
+Question 19
+When you publish modules to the Terraform Registry what is their visibility?
+
+Modules can be publicly available without being logged in Modules can be set to only be visible when signed up and logged in There is no option to make modules privately shared
+
+Modules can be publicly available without being logged in Modules can be marked to be private, and require a link to share. There is no option to make modules only publically available if logged in.
+
+Modules can be publicly available without being logged in Modules can be set to only be visible when signed up and logged in Modules can be marked to be private, and require a link to share.
+
+All modules will be publicly available on the Internet without signing up or logging in. There is no option to make them private.*
+
+EXPLANATION
+Terraform Registry allows you to publish modules by connecting a GitHub public repository.
+
+You aren't required to signup, you can connect your GitHub account for the sole purpose of publishing a public repo.
+
+If you need private modules you can use Terraform Cloud which has a private registry.
+
+=============
+
+Question 20
+Which of the following is not a valid Terraform state CLI command?
+
+terraform state new*
+
+There is no subcommand called new for terraform state CLI
+
+terraform state rm
+
+https://www.terraform.io/docs/cli/commands/state/rm.html
+
+terraform state list
+
+https://www.terraform.io/docs/cli/commands/state/list.html
+
+terraform state show
+
+https://www.terraform.io/docs/cli/commands/state/show.html
+
+terraform state mv
+
+https://www.terraform.io/docs/cli/commands/state/mv.html
+
+=========
+Question 21
+Which of the following is NOT a built-in string function?
+
+substr
+
+substr extracts a substring from a given string by offset and length.
+
+> substr("hello world", 1, 4)
+ello
+https://www.terraform.io/docs/language/functions/substr.html
+
+strrev
+
+strrev reverses the characters in a string. Note that the characters are treated as Unicode characters
+
+> strrev("hello")
+olleh
+> strrev("a ☃")
+☃ a
+https://www.terraform.io/docs/language/functions/strrev.html
+
+split
+
+split produces a list by dividing a given string at all occurrences of a given separator.
+
+> split(",", "foo,bar,baz")
+[
+  "foo",
+  "bar",
+  "baz",
+]
+https://www.terraform.io/docs/language/functions/split.html
+
+
+slice*
+
+Slice is a built-in Collection function
+
+slice extracts some consecutive elements from within a list.
+
+> slice(["a", "b", "c", "d"], 1, 3)
+[
+  "b",
+  "c",
+]
+https://www.terraform.io/docs/language/functions/slice.html
+
+=================
+
+What does the coalesce built-in function in Terraform do?
+
+coalesce takes a map of lists of strings and swaps the keys and values to produce a new map of lists of strings.
+
+transpose https://www.terraform.io/docs/language/functions/transpose.html
+
+coalesce takes a list of strings and returns a new list with any empty string elements removed.
+
+compact https://www.terraform.io/docs/language/functions/compact.html
+
+coalesce takes any number of list arguments and returns the first one that isn't empty
+
+coalescelist https://www.terraform.io/docs/language/functions/coalescelist.html
+
+coalesce takes any number of arguments and returns the first one that isn't null or an empty string.*
+
+coalesce https://www.terraform.io/docs/language/functions/coalesce.html
+====================
+
+Question 23
+When running terraform fmt what changes will occur to the configuration file?
+
+resource "aws_instance" "my_example_server"
+{
+  ami           = "INVALID_AMI_VALUE"
+  instance_type = "t2.nano"
+}
+Terraform fmt will produce no error but will automatically correct the curly brackets
+
+SELECTED
+You would think that it would since terraform fmt is a listing, and linters commonly correctly curly brackets but in this specific case it will not. It does automatically corrects things in files like indent levels.
+
+Terraform fmt will do nothing since everything is fine according to the command
+
+Terraform fmt will produce an error about the invalid AMI value
+
+Neither terraform validate or terraform fmt checks the values against the remote provider to ensure they are valid. Terraform validate would error out if AMI was not a string. Terraform fmt will produce no error.
+
+Terraform fmt will produce a syntax error, asking for the user to correct the curly brackets*
+
+EXPLANATION
+terraform fmt is used to rewrite Terraform configuration files to a canonical format and style.
+
+The format of the brackets is incorrect since they should be the same line as the block. However in this case it will result in a syntax error since terraform fmt does not appear capable of linting and correcting curly brackets.
+
+https://www.terraform.io/docs/cli/commands/fmt.html
+===========
+
+Question 24
+Not specifying the module version for a module will result in an error?
+
+module "consul" {
+  source = "hashicorp/consul/aws"
+}
+True, it will result in an error
+
+False, it will default to the latest version published
+
+EXPLANATION
+It does not explicitly say in the docs, but if you remove the version then you will see that it will pull the latest stable from Terraform Registy
+
+The real exam had a similar question which is why this is included in the exam pool of questions.
+
+https://www.terraform.io/docs/language/modules/sources.html
+
+==============
+
+Question 25
+What is the name of the terraform state file?
+
+terraform.tfstate*
+
+This state is stored by default in a local file named "terraform.tfstate", but it can also be stored remotely, which works better in a team environment.
+
+https://www.terraform.io/docs/language/state/index.html
+
+terraform.state.json
+
+terraform.vfvars
+
+tfstate.json
+
+terraform.state.hcl
+
+============
+Question 26
+Which IaC tool does not use state files to manage its cloud resources?
+
+Oracle Cloud
+
+Oracle's Resource Manager uses Terraform and so it would have a state file.
+
+AWS CloudFormation
+
+SELECTED
+CloudFormation is a cloud-native solution and there is no state file, or at least it is abstracted away so you don't have to manage or think about it
+
+Terraform
+
+Terraform is a cloud agnostic Iac and uses a state file
+
+GCP Deployment Manager
+
+SELECTED
+GCP is a cloud-native solution and there is no state file, or at least it is abstracted away so you don't have to manage or think about it
+
+Azure Resource Manager
+
+SELECTED
+Azure Resource Manager is a cloud-native solution and there is no state file, or at least it is abstracted away so you don't have to manage or think about it
+
+Pulumi
+
+Pulumi is a cloud-agnostic IaC and uses a state file
+
+EXPLANATION
+Cloud Agnostic solutions like Terraform and Plumi require a state file since state has to be portable.
+
+Most cloud service providers, will have a native solution and the managing state will be attracted away within their online service and you'll never be able to download or move the state file around.
+
+With the exception of Oracle Cloud which is powered by Terraform.
+==============
+
+Question 27
+What is the public source address for providers officially provided by Terraform?
+
+providers.terraform.io
+
+github.com/hashicorp/terraform-providers
+
+providers.terraform.com
+
+registry.terraform.io*
+
+EXPLANATION
+Hostname (optional): The hostname of the Terraform registry that distributes the provider. If omitted, this defaults to registry.terraform.io, the hostname of the public Terraform Registry.
+
+https://www.terraform.io/docs/language/providers/requirements.html#source-addresses
+
+https://registry.terraform.io/
+
+===============
+Question 28
+Terraform can store its state in variety of backends, where IaC tools such as AWS CloudFormation cannot.
+
+False
+
+True*
+===============
+
+Question 29
+When passing the filename of a saved plan file to terraform apply FILENAME what will happen?
+
+Terraform apply will prompt for approval
+
+It will not prompt for approval if you pass the filename of a previously-saved plan file
+
+Terraform apply will result in an error. You need to use the -plan flag.
+
+There is no such flag
+
+Terraform apply will not prompt for approval*
+EXPLANATION
+If you pass the filename of a previously-saved plan file, terraform apply performs exactly the steps specified by that plan file. It does not prompt for approval; if you want to inspect a plan file before applying it, you can use terraform show.
+
+https://www.terraform.io/docs/cli/commands/apply.html#saved-plan-mode
+===================
+
+Question 30
+A DevOps engineer needs to provision a resource that is not directly associated with a specific resource.
+
+How can they define their resource within their terraform configuration script?
+
+resource "empty" "cluster" {
+  # ...
+}
+resource "empty_resource" "cluster" {
+  # ...
+}
+resource "null" "cluster" {
+  # ...
+}
+*resource "null_resource" "cluster" {
+  # ...
+}
+
+If you need to run provisioners that aren't directly associated with a specific resource, you can associate them with a null_resource.
+
+https://www.terraform.io/docs/language/resources/provisioners/null_resource.html
+
+=======
+Question 31
+When specifying a module from an Arbitrary Git repository the following protocols are allowed
+
+SSL
+
+TLS
+
+SSH*
+
+HTTPS*
+
+EXPLANATION
+https://www.terraform.io/docs/language/modules/sources.html#generic-git-repository
+
+Arbitrary Git repositories can be used by prefixing the address with the special git:: prefix. After this prefix, any valid Git URL can be specified to select one of the protocols supported by Git.
+
+For example, to use HTTPS or SSH:
+
+module "vpc" { source = "git::https://example.com/vpc.git" }
+
+module "storage" { source = "git::ssh://username@example.com/storage.git" }
+
+=============
+Question 32
+How do you declare an input variable in Terraform?
+
+data "image_Id" {
+  type = string
+}
+Data is for defining data sources
+
+https://www.terraform.io/docs/language/data-sources/index.html
+
+locals "image_Id" {
+  type = string
+}
+locals are for defining local variables
+
+https://www.terraform.io/docs/language/values/locals.html
+
+var "image_Id" {
+  type = string
+}
+var is not a valid block. var is used when you want to reference a variable in the code via a named vaule.
+
+variable "image_Id" {
+  type = string
+}
+SELECTED
+You use a variable block
+
+Each input variable accepted by a module must be declared using a variable block:
+
+https://www.terraform.io/docs/language/values/variables.html#declaring-an-input-variable
+
+================
+Question 33
+You can use -target flag on terraform plan to only affect specific resources.
+
+False
+
+True*
+
+-target=ADDRESS - Instructs Terraform to focus its planning efforts only on resource instances which match the given address and on any objects that those instances depend on
+
+https://www.terraform.io/docs/cli/commands/plan.html#resource-targeting
+
+
+==========
+
+Question 34
+True or False: When Terraform is properly maintained, and its provider modules are updated, it can effectively replace the manual configuration of cloud resources through a provider's web portal.
+
+False
+
+However, it's important to acknowledge that Terraform's effectiveness in replacing manual configuration through a web portal depends on the state of its provider modules. If provider modules are not maintained or lag behind in supporting new cloud provider features, there can be situations where Terraform falls short in implementing certain features available through the provider's web portal. In such cases, the answer is false because Terraform may not fully replace the need for manual configurations. It's crucial for organizations to stay vigilant, actively monitor updates from both Terraform and their cloud providers, and ensure that their Terraform codebase remains aligned with the evolving cloud ecosystem to mitigate the risk of feature gaps.
+
+True
+
+SELECTED
+When Terraform is properly maintained and its provider modules are regularly updated, it can indeed effectively replace the manual configuration of cloud resources through a provider's web portal. Terraform's strength lies in its ability to define infrastructure as code (IaC), allowing for the automated provisioning and management of cloud resources. When provider modules are up-to-date, Terraform can seamlessly interact with a wide array of cloud services and features, ensuring that infrastructure remains consistent and reproducible. This approach enhances efficiency, reduces human error, and facilitates infrastructure scalability. As long as the Terraform codebase aligns with the latest provider module versions, it can fully replace the need for manual configurations through web portals.
+
+https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code
+
+=============
+Question 35
+The following data source is set.
+
+data "terraform_remote_state" "vpc" {
+  backend = "remote"
+
+  config = {
+    organization = "hashicorp"
+    workspaces = {
+      name = "vpc-prod"
+    }
+  }
+}
+How would it be referenced within a resource?
+
+resource "aws_instance" "foo" { # ... subnet_id = var.terraform_remote_state.vpc.outputs.subnet_id }
+
+resource "aws_instance" "foo" { # ... subnet_id = terraform_remote_state.vpc.outputs.subnet_id }
+
+resource "aws_instance" "foo" { # ... subnet_id = datas.terraform_remote_state.vpc.outputs.subnet_id }
+
+A data source named valued is data.
+
+*resource "aws_instance" "foo" { # ... subnet_id = data.terraform_remote_state.vpc.outputs.subnet_id }
+
+SELECTED
+https://www.terraform.io/docs/language/state/remote-state-data.html#example-usage-remote-backend-
+==========
+
+Question 36
+Terraform is a cloud-agnostic tool that can deploy to multiple cloud providers and including anything that has an API such as Kubernetes and Postgres?
+
+False
+
+True*
+
+https://www.terraform.io/intro/use-cases.html#multi-cloud-deployment
+==============
+
+Question 37
+When using terraform apply -replace= you can only specify a single resource for replacement
+
+False
+
+True*
+
+This is true, you can only replace a single resource at a time.
+
+https://www.terraform.io/docs/cli/commands/taint.html
+
+For example,
+
+terraform apply -replace="aws_instance.example[0]"
+=========
+
+Question 38
+Terraform Enterprise Air-gapped environment is designed to run in a network with no internet or outside connectivity
+
+False
+
+True*
+
+What is Air Gap?
+
+Air Gap or disconnected network is a network security measure employed on one or more computers to ensure that a secure computer network is physically isolated from unsecured networks e.g. Public Internet
+
+https://www.hashicorp.com/blog/deploying-terraform-enterprise-in-airgapped-environments
+==============
+
+Question 39
+A DevOps Engineer performs a terraform apply on a remote backend with locking. The DevOps Engineer terraform apply is not taking effect, and there is no other engineer that is currently executing operations so the engineer has determined unlocking must have failed.
+
+How can they resolve this issue?
+
+terraform apply -force-unlock
+
+there is no such flag
+
+delete the terraform.lock.hcl*
+
+This is not the recommended action
+
+https://www.terraform.io/docs/language/dependency-lock.html
+
+terraform apply -force
+
+there is no such flag
+
+terraform force-unlock
+
+Manually unlock the state for the defined configuration.
+
+This will not modify your infrastructure. This command removes the lock on the state for the current configuration. The behavior of this lock is dependent on the backend being used. Local state files cannot be unlocked by another process.
+
+https://www.terraform.io/docs/language/state/locking.html#force-unlock
+===========
+Question 40
+A module needs to have the latest patches applied but not update the major or minor version.
+
+Which of the following will achieve this requirement?
+
+version = "?= 1.2.0"
+
+version = "= 1.2.0"
+
+version = "~> 1.2.0"
+
+~>: Allows only the rightmost version component to increment. For example, to allow new patch releases within a specific minor release, use the full version number: ~> 1.0.4 will allow installation of 1.0.5 and 1.0.10 but not 1.1.0. This is usually called the pessimistic constraint operator.
+
+https://www.terraform.io/docs/language/expressions/version-constraints.html
+===============
+
+Question 41
+A DevOps Engineer is defining a security group within their Terraform Configuration. They need to define many ingress rules to allow port access any many different IP ranges and protocols.
+
+They want to dry up their code and use one of Terraform's meta-arguments to produce many nested blocks for ingress rules.
+
+Which type of block should they use?
+
+For
+
+This is not a meta argument for resources but is a first-class language feature to iterate over values within Terraform.
+
+Count
+
+Count is useful when you have multiple VMs in a fleet, all you're changing is the number or you want to include the count as part of the name or tag via an interpolation string.
+
+For Each
+
+For each is useful when you have a map of key pair values than you want to iterate over that vary for a group of resources.
+
+Let's say you wanted to deploy 5 VMs but you wanted to write out the same for each in a map.
+
+For Each is used part of a dynamic block:
+
+  dynamic "setting" {
+    for_each = var.settings
+    content {
+      namespace = setting.value["namespace"]
+      name = setting.value["name"]
+      value = setting.value["value"]
+    }
+  }
+
+Dynamic*
+
+A dynamic block acts much like a for expression, but produces nested blocks instead of a complex typed value. It iterates over a given complex value, and generates a nested block for each element of that complex value.
+
+https://www.terraform.io/docs/language/expressions/dynamic-blocks.html
+
+=================
+Question 42
+When you run terraform plan it will also run terraform validate?
+
+False
+
+True
+
+SELECTED
+When you run terraform plan it includes a validation check. Its more lightweight to run terraform validate.
+
+https://www.terraform.io/docs/cli/commands/validate.html
+
+=============
+
+Question 43
+What is the general order of a terraform lifecycle?
+
+create> validate > plan > apply > destroy
+
+
+There is no create command
+
+init > validate > apply > plan > destroy
+
+plan comes before apply, fmt could be included before validate.
+
+init > validate > fmt > plan > apply > destroy*
+
+Validating the Terraform configuration before formatting is considered a better practice because it helps ensure that the configuration is syntactically correct and functionally accurate before applying any stylistic changes to the code.
+
+init > fmt > validate > plan > apply > destroy
+==================
+
+Question 44
+When you want to remove a record tracking a remote object in your state file but have the remote object (eg. Azure Virtual Machine) to still exist, which command do you use?
+
+terraform apply -replace
+
+When you want the terraform state file to update to reflect the state of actual remote objects, like when a VM was deleted.
+
+terraform resource rm
+
+There is no command call terraform.
+
+terraform refresh
+
+When you want the terraform state file to update to reflect the state of actual remote objects, like when a VM was deleted.
+
+This command is deprecated in favour of terraform apply -replace
+
+ttps://www.terraform.io/cli/commands/refresh
+
+terraform state rm*
+
+Usage: terraform state rm [options] ADDRESS...
+
+Terraform will search the state for any instances matching the given resource address, and remove the record of each one so that Terraform will no longer be tracking the corresponding remote objects
+
+https://www.terraform.io/docs/cli/commands/state/rm.html
+
+===============
+
+Question 45
+When running 'terraform login', where will the API token be stored?
+
+variables.tf
+
+variables.tf is just a configuration file that is designated to store input variables. You aren't supposed to store values in here. You can set default values but you would never set an API token here because it could be committed to a codebase repo.
+
+.env
+
+There is no such file called .env. .env is a dotenv file that is popular among many programing langauges.
+
+terraform.tfstate
+
+terraform.tfstate does not hold the API token.
+
+credentials.tfrc.json
+
+SELECTED
+https://www.terraform.io/docs/cli/commands/login.html#credentials-storage
+
+By default, Terraform will obtain an API token and save it in plain text in a local CLI configuration file called credentials.tfrc.json. When you run terraform login, it will explain specifically where it intends to save the API token and give you a chance to cancel if the current configuration is not as desired.
+
+============
+
+Question 46
+When troubleshooting terraform, when is it advised to set verbose logging? (Select 2)
+
+State Errors
+
+Language Errors
+
+Provider Errors
+
+SELECTED
+Core Errors
+
+SELECTED
+EXPLANATION
+In the HashiCorp Learn tutorial on debugging, its recommended for Core and Provider errors to turn on verbose logging and submit the issue to Github for the respected open-source project.
+
+https://learn.hashicorp.com/tutorials/terraform/troubleshooting-workflow?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS
+
+Language errors: The primary interface for Terraform is the HashiCorp Configuration Language (HCL), a declarative configuration language. The Terraform core application interprets the configuration language. When Terraform encounters a syntax error in your configuration, it prints out the line numbers and an explanation of the error.
+
+State errors: The Terraform state file stores information on provisioned resources. It maps resources to your configuration and tracks all associated metadata. If state is out of sync, Terraform may destroy or change your existing resources. After you rule out configuration errors, review your state. Ensure your configuration is in sync by refreshing, importing, or replacing resources.
+
+Core errors: The Terraform core application contains all the logic for operations. It interprets your configuration, manages your state file, constructs the resource dependency graph, and communicates with provider plugins. Errors produced at this level may be a bug. Later in this tutorial, you will learn best practices for opening a GitHub issue for the core development team.
+
+Provider errors: The provider plugins handle authentication, API calls, and mapping resources to services. Later in this tutorial, you will learn best practices for opening a GitHub issue for the provider development team.
+=========
+
+Question 47
+Not all terraform resources are importable via the terraform import command.
+
+False
+
+True*
+
+Each resource in Terraform must implement some basic logic to become importable. As a result, not all Terraform resources are currently importable. For those resources that support import, they are documented at the bottom of each resource documentation page, under the Import heading. If you find a resource that you want to import and Terraform reports that it is not importable, please report an issue in the relevant provider repository.
+
+https://www.terraform.io/docs/cli/import/importability.html
+
+==========
+uestion 48
+The safest place to store your state file is within your git repository
+
+True
+
+False
+
+SELECTED
+Your state file can contain sensitive information, and storing in your codebase git repository is considered dangerous.
+
+=========
+Question 49
+The source name for a provider is the following format: [/]/
+
+What happens when no host name is provided eg:
+
+terraform {
+  required_providers {
+    mycloud = {
+      source  = "mycorp/mycloud"
+      version = "~> 1.0"
+    }
+  }
+}
+It will result in a syntax error
+
+This is not true
+
+It will check if you authenticated to Terraform Cloud, if it cannot match to your Private Registry, it will check the public Terraform Registry, If it finds neither it will result in an error
+
+This is not true.
+
+It will check for a hostname in the Terraform CLI Configuration File and if not found will result in an error
+
+This is not true
+
+It will default hostname to Terraform Registry*
+
+Hostname (optional): The hostname of the Terraform registry that distributes the provider. If omitted, this defaults to registry.terraform.io, the hostname of the public Terraform Registry.
+
+https://www.terraform.io/docs/language/providers/requirements.html#source-addresses
+==============
+
+Question 50
+When defining a data source block, how can we narrow down the resource we want to select from a remote provider?
+
+regex blocks
+
+There is no such feature. Sometimes you can select based on regex attributes, but there is no regex block
+
+You cannot, you must provide the logical id from the cloud provider
+
+This is not true
+
+selector blocks
+
+There is no such feature
+
+filter blocks
+
+SELECTED
+The filter block allows a data source to select resources from a provider.
+
+data "aws_ami" "web" {
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+
+  filter {
+    name   = "tag:Component"
+    values = ["web"]
+  }
+}
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs#argument-reference
+
+==========
+
+Question 51
+When running terraform init, it will do the following:
+
+Download plugin dependencies
+
+SELECTED
+https://www.terraform.io/docs/cli/commands/init.html
+
+Initial a new Terraform Cloud remote workspace
+
+You have to manually configure terraform cloud as a backend and create a workspace via the console.
+
+Create a dependency lock file
+
+SELECTED
+Create a .terraform directory
+
+SELECTED
+Create a state file.
+
+A state file is created when you do a terraform apply
+==============
+Question 52
+terraform apply -destroy is the same as writing terraform destroy
+
+Is this statement true?
+
+False
+
+True
+
+SELECTED
+This is true. terraform destroy is an alias of terraform apply -destroy
+
+Note: The -destroy option to terraform apply exists only in Terraform v0.15.2 and later. For earlier versions, you must use terraform destroy to get the effect of terraform apply -destroy.
+
+https://www.terraform.io/docs/cli/commands/destroy.html#usage
+===============
+Question 53
+In order to authenticate to Terraform Cloud what is recommended for local development?
+
+Obtain API keys via Terraform Cloud and store and load the value vis terraform.tfvars
+
+You cannot store the API Token within the tfvars file.
+
+Obtain API keys via Terraform Cloud and store them in variables.tf, define them as input variables and store the API token as a default value.
+
+variables.tf is just a configuration file that only has variable definitions, so this is the same as hardcoding in your main.tf, and this is not recommended since your token would end up in your repo's codebase.
+
+You can store the API Token in main.tf because it doesn't get set there.
+
+Obtain API keys via Terraform Cloud and embed the values into the CLI configuration file
+
+manual configuration is possible in the .terraformrc
+
+credentials "app.terraform.io" {
+  token = "xxxxxx.atlasv1.zzzzzzzzzzzzz"
+}
+It's not recommended for local development, and you should definitely not hard code the token in your configuration file.
+
+terraform login
+
+SELECTED
+Terraform Login command can be used to automatically obtain and save an API token for Terraform Cloud, Terraform Enterprise, or any other host that offers Terraform services.
+
+https://www.terraform.io/docs/cli/commands/login.html
+
+This is the recommended way to connect to terraform
+==============
+
+Question 54
+How do Terraform backups work when using a local backend?
+
+Terraform stores a series of backups in the .terraform/states directory
+
+Terraform stores a series of backups in the .terraform/backups directory
+
+Terraform does not backup state locally. You must manually create a copy of your state file.
+
+Terraform takes the current state and stores it in a file called terrraform.tfstate.backup
+
+SELECTED
+Its not easy to find documentation for this feature, but if you test in practice you will see that this is how it works locally.
+
+============
+
+Question 55
+What is the purpose of Sentinel with Terraform?
+
+Sentinel provides a secure score so you know the security posture of your infrastructure
+
+You would use a third-party provider like VSG to generate a secure score.
+
+Sentinel monitors state files for sensitive data and provides logging of your various runs to for tamper evidence.
+
+There is a logging service in Enterprise. its not part of Sentinel
+
+Sentinel alerts you of malicious actors who have intruded into your infrastructure.
+
+Sentinel is not an IPS/IDS tool. You could use Terraform to provision such cloud services for the respected provider.
+
+Sentinel allows you to write policies to validate that your infrastructure is in its expected configuration.
+
+SELECTED
+Sentinel is a Policy as Code tool. You can use it to validate the state of your infrastructure and automate it for remediation to ensure your infrastructure stays compliant.
+
+Sentinel Documentation
+=============
+
+Question 56
+Does the terraform state file store sensitive values?
+
+No, the statefile does not contain sensitive values from variables.
+
+This is not true. The state file can contain values from input variables.
+
+No, input variables are automatically encrypted when stored in the state file.
+
+This is not true. Terraform does not encrypt values within a state file.
+
+Yes, but if you apply sensitive = true sensitive true, the value will be masked in the statefile.
+
+SELECTED
+There is a sensitive attribute but all it does is mask the output to console when using CLI commands.
+
+Yes, it can store sensitive state files, regardless of attributes applied
+
+Yes, when you use input variables the values may be stored within your state file depending on how your file is configured. You should always treat your state file as containing sensitive data. Its recommended to use a remote backend or Terraform Cloud to manage state.
+
+EXPLANATION
+This is a very good read about managing secrets in your Terraform Code:
+
+https://blog.gruntwork.io/a-comprehensive-guide-to-managing-secrets-in-your-terraform-code-1d586955ace1
+
+https://www.terraform.io/docs/language/values/variables.html#suppressing-values-in-cli-output
+
+=============
+Question 57
+Is this a valid configuration of the file provisioner?
+
+  provisioner "file" {
+    source      = "conf/myapp.conf"
+    destination = "/etc/myapp.conf"
+  }
+Yes, it has a source and destination
+
+SELECTED
+Yes, all you need is a source and destination or a source and content
+
+https://www.terraform.io/docs/language/resources/provisioners/file.html#argument-reference
+
+https://www.terraform.io/language/resources/provisioners/connection#example-usage
+
+No, file provisioner can only move tf, sh, zip or golang files.
+
+There is no restriction on content_type of files
+
+No, the source has to be absolute
+
+This is not true, it can be relative or absolute
+
+No it is missing a content block
+
+content block is required or the destination block is required. You cannot have both.
+
+No its missing the description attribute
+
+There is no description attribute
+
+==============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

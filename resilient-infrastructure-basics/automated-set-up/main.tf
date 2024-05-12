@@ -81,7 +81,7 @@ resource "aws_launch_template" "webapp_lt" {
   name_prefix   = "webapp-lt-"
   image_id      = "ami-0e001c9271cf7f3b9"  # Example AMI ID for Amazon Linux 2
   instance_type = "t2.micro"
-  user_data = base64encode(file("a4l.sh"))
+  user_data = base64encode(file("apache.sh"))
 
   network_interfaces {
     associate_public_ip_address = true
