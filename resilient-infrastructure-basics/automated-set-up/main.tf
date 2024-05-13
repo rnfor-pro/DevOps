@@ -6,6 +6,7 @@ resource "aws_vpc" "custom_vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
   enable_dns_support   = true
+
   tags = {
     Name = "Custom-VPC"
   }
@@ -14,16 +15,22 @@ resource "aws_vpc" "custom_vpc" {
 resource "aws_subnet" "public_subnet" {
   count                   = 3
   vpc_id                  = aws_vpc.custom_vpc.id
-  cidr_block              = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"][count.index]
+  cidr_block              = cidrsubnet(aws_vpc.custom_vpc.cidr_block, 8, count.index)
   map_public_ip_on_launch = true
-  availability_zone       = ["us-east-1a", "us-east-1b", "us-east-1c"][count.index]
+  availability_zone       = element(data.aws_availability_zones.available.names, count.index)
+
   tags = {
     Name = "Public-Subnet-${count.index + 1}"
   }
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.custom_vpc.id
+
   tags = {
     Name = "Custom-IGW"
   }
@@ -31,16 +38,18 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.custom_vpc.id
+
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
+
   tags = {
     Name = "Public-Route-Table"
   }
 }
 
-resource "aws_route_table_association" "a" {
+resource "aws_route_table_association" "public_association" {
   count          = length(aws_subnet.public_subnet)
   subnet_id      = aws_subnet.public_subnet[count.index].id
   route_table_id = aws_route_table.public_route_table.id
@@ -79,9 +88,9 @@ resource "aws_security_group" "web_sg" {
 
 resource "aws_launch_template" "webapp_lt" {
   name_prefix   = "webapp-lt-"
-  image_id      = "ami-0e001c9271cf7f3b9"  # Example AMI ID for Amazon Linux 2
+  image_id      = "ami-0e001c9271cf7f3b9" # Example AMI ID for Amazon Linux 2
   instance_type = "t2.micro"
-  user_data = base64encode(file("apache.sh"))
+  user_data     = base64encode(file("apache.sh"))
 
   network_interfaces {
     associate_public_ip_address = true
@@ -132,15 +141,27 @@ resource "aws_lb_target_group" "web_tg" {
   }
 }
 
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.web_lb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.web_tg.arn
+  }
+}
+
+
 resource "aws_autoscaling_group" "web_asg" {
   launch_template {
     id      = aws_launch_template.webapp_lt.id
     version = "$Latest"
   }
 
-  min_size         = 1
-  max_size         = 4
-  desired_capacity = 2
+  min_size            = 1
+  max_size            = 4
+  desired_capacity    = 2
   vpc_zone_identifier = aws_subnet.public_subnet.*.id
 
   target_group_arns = [aws_lb_target_group.web_tg.arn]
@@ -151,7 +172,3 @@ resource "aws_autoscaling_group" "web_asg" {
     propagate_at_launch = true
   }
 }
-
-# Deletion Steps in Terraform
-
-# To delete the setup, simply run `terraform destroy`. Ensure all resources are managed by Terraform and listed in your configuration for successful and complete deletion. Double-check your Terraform state files and logs to verify that no resources are left undeleted.
