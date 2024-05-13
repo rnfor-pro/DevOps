@@ -1,0 +1,5 @@
+packages:
+  - httpd
+runcmd:
+  - sudo systemctl start httpd
+  - sudo systemctl enable httpd 
