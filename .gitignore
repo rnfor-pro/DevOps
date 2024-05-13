@@ -36,10 +36,3 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# unwanted files
-PracticeExam2
-PracticeExam3.yaml
-PracticeExamtwo.yaml
-practiceExamone.yamlyaml.yaml
-Terraform-Associate-Cheatsheets.pdf
-Terraform-Associate-Lecture-Slides.pdf
