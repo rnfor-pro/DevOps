@@ -1,6 +1,6 @@
 # Deploy Netflix Clone on AWS Cloud using Jenkins - DevSecOps Project!
 
-DevSecOps Pipeline Solution built using Jenkins as the CI tool. With Sonarqube, OWASP, and Trivy for security and vulnerability detection. Docker used in containerizing the App, and ArgoCD to enabled Continuous Deployment to AWS EKS. Helm to managing the Kubernetes applications a breeze. With the power of Prometheus and Grafana, to gaine valuable insights into the application’s performance, cluster health, and pipeline metrics.
+DevSecOps Pipeline Solution built using Jenkins as the CI tool, with SonarQube, OWASP, and Trivy for security and vulnerability detection. Docker is used for containerizing the app, and ArgoCD enables Continuous Deployment to AWS EKS. Helm makes managing the Kubernetes applications a breeze. With the power of Prometheus and Grafana, we gain valuable insights into the application’s performance, cluster health, and pipeline metrics.
 
 - Prerequisites
 
