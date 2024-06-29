@@ -34,14 +34,14 @@ hostIP:8080
   - Docker commons
   - Docker pipeline
   - Docker API
-  - Docker build step
+  - docker-build-step
   - Prometheus metrics
   - Email extension template
   - Eclipse Temurin installer
-  - SonarQube scanner
-  - Nodesjs
-  - OWASP Dependency Check
-  - Blue ocean
+  - SonarQube Scanner
+  - NodeJS
+  - OWASP Dependency-Check
+  - Blue Ocean
 
 SonarQube
 ---
