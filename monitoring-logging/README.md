@@ -206,6 +206,7 @@ Likewise, let’s integrate Jenkins with Prometheus to monitor the CI/CD pipelin
 Head over to `Manage Jenkins --> System and scroll all the way down to Prometheus tab`
 check the `Add build parameter label to metrics` box, `Add Build status label to metrics`, `Process Disabled jobs`, scroll down abit and check `Collect metrics for each run per build [Important: read help before enabling this option]`, `Collect code coverage`, and  `Disable metrics` boxes
 The click on `apply` and `save`
+<img width="1063" alt="Screenshot 2024-06-29 at 6 30 10 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/82144b76-d1e5-400b-b476-c92c2fa91ff8">
 
 Entry for Jenkins
 ---
