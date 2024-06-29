@@ -204,8 +204,6 @@ Scrool all the way down and click in the search box, select Prometheus and click
 
 Likewise, let’s integrate Jenkins with Prometheus to monitor the CI/CD pipeline. 
 
-`Goto Manage Jenkins –> Plugins –> Available Plugins`
-
 Entry for Jenkins
 ---
 ```
