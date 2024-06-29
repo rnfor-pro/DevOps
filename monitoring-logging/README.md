@@ -221,6 +221,7 @@ sudo vim /etc/prometheus/prometheus.yml
 promtool check config /etc/prometheus/prometheus.yml
 curl -X POST http://localhost:9090/-/reload
 ```
+Head over to Prometheus UI and make Jenkins has appeared in the list of targets
 
 Then, you can use a POST request to reload the config.
 ```
