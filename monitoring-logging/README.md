@@ -235,7 +235,7 @@ Check the targets section in your prometheus UI you will see Jenkins is added to
 
 Let’s add Dashboard for a better view in Grafana
 
-`Click On Dashboard –> + symbol –> Import`
+`Click On Dashboard –> + symbol or New –> Import`
 
 Dashboard
 Use Id `9964` and click on load
