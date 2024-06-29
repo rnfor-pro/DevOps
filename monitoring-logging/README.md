@@ -185,6 +185,11 @@ Grafana User Interface can be accessed through the server `public IP on port 300
 Click on data sources
 <img width="1581" alt="Screenshot 2024-06-29 at 5 37 00 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/7d76e519-9f4a-4da6-a04c-88bef96505c8">
 
+Click on prometheus
+<img width="953" alt="Screenshot 2024-06-29 at 5 46 10 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/f32a9127-891d-4251-9631-d7e7a0c3df72">
+Enter prometheus url as shown below then scroll down and click save
+<img width="1140" alt="Screenshot 2024-06-29 at 5 50 29 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/3e1b8a29-5c88-44e7-a2cf-2fbbfd75f9e5">
+
 [Follow video for further configurations]()
 
 Likewise, let’s integrate Jenkins with Prometheus to monitor the CI/CD pipeline. 
