@@ -197,7 +197,8 @@ Enter ID `1860` and click on Load.
 <img width="1166" alt="Screenshot 2024-06-29 at 6 00 15 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/37f43989-3e55-4ac5-b803-f9716404e2b6">
 Scrool all the way down and click in the search box, select Prometheus and click on Import
 <img width="1107" alt="Screenshot 2024-06-29 at 6 05 07 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/351e47fc-1d7d-47d0-81d9-4d4048b71cf0">
-
+Grafana UI view
+<img width="1652" alt="Screenshot 2024-06-29 at 8 17 22 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/3a3e434c-2365-4ffa-81d9-9186a3b494e2">
 
 
 [Follow video for further configurations]()
@@ -241,7 +242,8 @@ Dashboard
 Use Id `9964` and click on load
 
 Select Prometheus as data source and click on Import
-Now you will see the Detailed overview of Jenkins
+Now you will see the Detailed overview of Jenkins in grafana UI
+<img width="1656" alt="Screenshot 2024-06-29 at 8 15 16 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/88fcf946-39b7-41be-9990-4ab2918f5492">
 
 
 Email extension template
