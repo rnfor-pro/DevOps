@@ -182,6 +182,8 @@ We’ve already installed Grafana via the user data script. Let’s confirm its 
 sudo systemctl status grafana-server
 ```
 Grafana User Interface can be accessed through the server `public IP on port 3000` by default. The default `username and password is admin`.
+Click on data sources
+<img width="1581" alt="Screenshot 2024-06-29 at 5 37 00 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/7d76e519-9f4a-4da6-a04c-88bef96505c8">
 
 [Follow video for further configurations]()
 
