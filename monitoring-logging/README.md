@@ -42,6 +42,7 @@ hostIP:8080
   - NodeJS
   - OWASP Dependency-Check
   - Blue Ocean
+Scroll all the way down and check the restart jenkins button to restart jenkins  
 
 SonarQube
 ---
@@ -66,6 +67,7 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 Prometheus Exporter Configuration
 ---
 Let’s finalize Prometheus installation by creating a systemd unit configuration file for Prometheus.
+SSH into your monitoring server
 
 ```
 sudo vi /etc/systemd/system/prometheus.service
@@ -195,6 +197,7 @@ Enter ID `1860` and click on Load.
 <img width="1166" alt="Screenshot 2024-06-29 at 6 00 15 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/37f43989-3e55-4ac5-b803-f9716404e2b6">
 Scrool all the way down and click in the search box, select Prometheus and click on Import
 <img width="1107" alt="Screenshot 2024-06-29 at 6 05 07 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/351e47fc-1d7d-47d0-81d9-4d4048b71cf0">
+
 
 
 [Follow video for further configurations]()
