@@ -1,6 +1,6 @@
 # Deploy Netflix Clone on AWS Cloud using Jenkins - DevSecOps Project!
 
-DevSecOps Pipeline Solution built using Jenkins as the CI tool, with SonarQube, OWASP, and Trivy for security and vulnerability detection. Docker is used for containerizing the app, and ArgoCD enables Continuous Deployment to AWS EKS. Helm makes managing the Kubernetes applications a breeze. With the power of Prometheus and Grafana, we gain valuable insights into the application’s performance, cluster health, and pipeline metrics.
+DevSecOps Pipeline Solution built using Jenkins as the CI tool, with SonarQube, OWASP, and Trivy for security and vulnerability detection. Docker is used for containerizing the app, and ArgoCD enables Continuous Delivery/Deployment to AWS EKS. Helm makes managing the Kubernetes applications a breeze. With the power of Prometheus and Grafana, we gain valuable insights into the application’s performance, cluster health, and pipeline metrics.
 
 - Prerequisites
 
@@ -167,7 +167,7 @@ sudo vim /etc/prometheus/prometheus.yml
       - targets: ["localhost:9100"]
 ```
 
-We'll can use Promtool to check the syntax of the config. If it’s successful, we then go ahead and reload Prometheus configuration without restarting.
+We'll use Promtool to check the syntax of the config. If it’s successful, we then go ahead and reload Prometheus configuration without restarting.
 ```
 promtool check config /etc/prometheus/prometheus.yml
 curl -X POST http://localhost:9090/-/reload
@@ -506,7 +506,7 @@ Next, we head to Manage Applications → New App
 
 We’ll access the application through the `node public IP on port 30007` (ensure you enable port 30007 on the Node Cluster Security Group).
 
-For this setup, we’ll simply terraform destroy first in our Infrastructure directory and then in our kube-EKS directory.
+To destroy this setup, we’ll simply run terraform destroy first in our Infrastructure directory and then in our kube-EKS directory.
 
 
 
