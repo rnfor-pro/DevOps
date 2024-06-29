@@ -189,6 +189,13 @@ Click on prometheus
 <img width="953" alt="Screenshot 2024-06-29 at 5 46 10 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/f32a9127-891d-4251-9631-d7e7a0c3df72">
 Enter prometheus url as shown below then scroll down and click save
 <img width="1140" alt="Screenshot 2024-06-29 at 5 50 29 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/3e1b8a29-5c88-44e7-a2cf-2fbbfd75f9e5">
+Select Dashboard on the left menu bar, Click on New, the blue tab far right and select import.
+<img width="1648" alt="Screenshot 2024-06-29 at 5 56 01 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/be6b547e-9e25-4568-b8ae-9b5ec2b46db3">
+Enter ID `1860` and click on Load. 
+<img width="1166" alt="Screenshot 2024-06-29 at 6 00 15 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/37f43989-3e55-4ac5-b803-f9716404e2b6">
+Scrool all the way down and click in the search box, select Prometheus and click on Import
+<img width="1107" alt="Screenshot 2024-06-29 at 6 05 07 AM" src="https://github.com/rnfor-pro/DevOps/assets/67124388/351e47fc-1d7d-47d0-81d9-4d4048b71cf0">
+
 
 [Follow video for further configurations]()
 
