@@ -303,15 +303,29 @@ Click on Install from `adoptium.net` and select `jdk-17.0.8.1+1` then click on `
 SonarQube scanner
 ---
 Configure Sonar Server in Manage Jenkins
-Grab the Public IP Address of your EC2 Instance, Sonarqube works on Port 9000, so `Public IP>:9000`.
+Access SonarQube UI , Sonarqube works on Port 9000, so `Public IP>:9000`.
 
-Goto your Sonarqube Server. Click on Administration → Security → Users → Click on Tokens and Update Token → Give it a name → and click on Generate Token
+Click on Administration → Security → Users → Click on Tokens and Update Token → Give it a name → and click on Generate Token
+<img width="1248" alt="Screenshot 2024-06-30 at 5 22 44 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/736bf003-e117-4733-bd1f-149967a8d6cc">
 [video]()
 
 copy Token
-`Goto Jenkins Dashboard → Manage Jenkins → Credentials → Add Secret Text. It should look like this`
+`Goto Jenkins Dashboard → Manage Jenkins → Credentials → Global --> Add Credentials
 
-Now, go to Dashboard → Manage Jenkins → System and Add like the below image.
+<img width="1487" alt="Screenshot 2024-06-30 at 5 27 50 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/adef3c80-c20f-4de0-ad56-be0ee2243469">
+
+Click in the box under `kind` and select `secret text` add Secret text created earlier in snarqube enter `ID` and `d  escription` then click on `create`. 
+
+
+<img width="1485" alt="Screenshot 2024-06-30 at 5 29 23 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/168a6abe-6d99-4dde-8aa1-f82f0ff31061">
+
+Now, go to Dashboard → Manage Jenkins → System --> scroll down to `SonarQube servers` and click on `add sonarqube`.
+
+<img width="1313" alt="Screenshot 2024-06-30 at 5 40 45 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/49d7db8a-cde8-461e-95e1-8134485318ca">
+
+<img width="1313" alt="Screenshot 2024-06-30 at 5 40 45 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/90d975a9-b400-4f84-a3e6-7624166000aa">
+
+
 [video]()
 
 The Configure System option in Jenkins is used to configure different servers
