@@ -423,6 +423,13 @@ pipeline{
 }
 ```
 
+SonarQube Report
+<img width="1587" alt="Screenshot 2024-06-30 at 7 00 24 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/46761940-2390-4b08-9f7c-881bae354104">
+
+Jenkins server performance and Builds execution in Grafana UI
+
+<img width="1642" alt="Screenshot 2024-06-30 at 7 01 02 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/d7f41ac6-1f86-47ea-8dd9-184c89622c15">
+
 OWASP Dependency Check
 ---
 `Goto Dashboard → Manage Jenkins → Tools → Dependency check`
