@@ -332,6 +332,10 @@ The Configure System option in Jenkins is used to configure different servers
 Global Tool Configuration is used to configure different tools that we installed using Plugins
 
 We will install a sonar scanner in the tools.
+Go to Manage jenkins --> tools --> `SonarQube Scanner installations`
+
+<img width="1560" alt="Screenshot 2024-06-30 at 5 54 08 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/82eaa7d5-18bd-41c4-adfd-f2779fcc0a3f">
+
 [video]()
 
 In the Sonarqube Dashboard add a quality gate also
@@ -339,6 +343,12 @@ In the Sonarqube Dashboard add a quality gate also
 `
 Administration–> Configuration–>Webhooks
 `
+
+<img width="1492" alt="Screenshot 2024-06-30 at 5 56 23 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/e6489ac1-ee8b-48cf-9379-222b63fb133a">
+
+<img width="1605" alt="Screenshot 2024-06-30 at 5 58 16 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/07bd0acd-db92-42e4-bd4e-7169eb0e4e32">
+
+
 in url section of quality gate
 `
 <http://jenkins-public-ip:8080>/sonarqube-webhook/
