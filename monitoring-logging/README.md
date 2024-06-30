@@ -274,6 +274,15 @@ Go to Manage jenkins --> System, scroll doen to `E-mail Notification`
 ![Screenshot 2024-06-29 at 10 00 20 PM](https://github.com/rnfor-pro/playlist_2/assets/67124388/93b14681-5d01-42b4-aa31-514e0089632c)
 ![Screenshot 2024-06-29 at 9 51 12 PM](https://github.com/rnfor-pro/playlist_2/assets/67124388/d543ff16-ec0b-467e-8e61-4983aeb9e259)
 
+Click on `save`
+Go to `Manage Jenkins` --> `Credentials` --> `System` --> `Global credentials(unrestricted)` --> add credentials
+<img width="1615" alt="Screenshot 2024-06-29 at 10 10 22 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/211a1d5b-16d4-4dac-b537-69c2c9d4212e">
+Go back to manage jenkins and scroll down to Extended E-mail
+<img width="852" alt="Screenshot 2024-06-29 at 10 15 12 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/c9031b29-68c0-4712-9ab9-cd9b741959ff">
+
+Sceoll doen to `DeTault triggers`
+<img width="1456" alt="Screenshot 2024-06-29 at 10 19 19 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/fd7c31ef-101e-46bc-82b0-c412d027ed85">
+
 [video]()
 
 Eclipse Temurin installer
