@@ -250,8 +250,24 @@ Email extension template
 ---
 `Go to your Gmail and click on your profile
 Then click on Manage Your
-Google Account –> click on the security tab on the left side panel you will get this page(provide mail password).
-2-step verification should be enabled`.
+<img width="1654" alt="Screenshot 2024-06-29 at 9 07 14 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/af5a9011-d43d-4ae2-98b1-35b8addf8b8b">
+
+Google Account –> click on the security tab on the left side panel 
+<img width="1657" alt="Screenshot 2024-06-29 at 9 13 43 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/760824bd-0668-40ba-badf-597e3d33d18c">
+Provide mail password and click on turn on 2-factor authentication
+<img width="1564" alt="Screenshot 2024-06-29 at 9 15 59 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/6ba452b1-afd6-4cf8-aa18-7e33d455e31b">
+Click on done
+<img width="1450" alt="Screenshot 2024-06-29 at 9 17 04 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/44903637-12b0-4de0-9fb0-521fb4636011">
+
+2-step verification should be enabled.
+<img width="1414" alt="Screenshot 2024-06-29 at 9 19 04 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/12a507d3-9fca-4a4b-abcd-93c1530dc7c3">
+Type apps in the search bar and select apps passwords
+<img width="1236" alt="Screenshot 2024-06-29 at 9 20 05 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/af2a769a-d916-4906-8687-88de8a0f0bf9">
+Give it a title and click create
+<img width="1324" alt="Screenshot 2024-06-29 at 9 21 32 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/eb5cd397-9956-40ab-b03f-04c7c70225c2">
+Copy password and save in a secure place
+<img width="1365" alt="Screenshot 2024-06-29 at 9 22 22 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/8cc8c76b-b771-479b-b13f-71a098f7092b">
+
 [video]()
 
 Eclipse Temurin installer
