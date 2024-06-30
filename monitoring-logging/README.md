@@ -268,6 +268,12 @@ Give it a title and click create
 Copy password and save in a secure place
 <img width="1365" alt="Screenshot 2024-06-29 at 9 22 22 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/8cc8c76b-b771-479b-b13f-71a098f7092b">
 
+Go to Manage jenkins --> System, scroll doen to `E-mail Notification`
+<img width="1599" alt="Screenshot 2024-06-29 at 9 41 58 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/fc8ef423-2e97-4877-a20d-308af87326ce">
+<img width="1566" alt="Screenshot 2024-06-29 at 9 44 59 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/ae6a9ea0-5d7e-4b67-8cee-aa78709814c7">
+![Screenshot 2024-06-29 at 9 49 01 PM](https://github.com/rnfor-pro/playlist_2/assets/67124388/77a0fa06-5301-45ed-b1d9-83bac6b1fae9)
+![Screenshot 2024-06-29 at 9 51 12 PM](https://github.com/rnfor-pro/playlist_2/assets/67124388/d543ff16-ec0b-467e-8e61-4983aeb9e259)
+
 [video]()
 
 Eclipse Temurin installer
