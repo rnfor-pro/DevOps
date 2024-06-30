@@ -287,9 +287,17 @@ Sceoll doen to `DeTault triggers`
 
 Eclipse Temurin installer
 ---
-Configure Java and Nodejs in Global Tool Configuration
+Configure Nodejs and Java in Global Tool Configuration
 
-`Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on Apply and Save`
+`Goto Manage Jenkins → Tools → Install NodeJs(16)→ Click on Apply and Save`
+<img width="1641" alt="Screenshot 2024-06-30 at 4 58 47 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/8f62cf3b-0484-4561-9439-4af14e4dd73f">
+
+`Goto Manage Jenkins → Tools → JDK installations → Click on Apply and Save`
+<img width="1563" alt="Screenshot 2024-06-30 at 5 07 19 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/587fefd9-c98c-42f1-8b0d-d05e80c1d46f">
+
+Click on Install from `adoptium.net` and select `jdk-17.0.8.1+1` then click on `apply` and `save` 
+<img width="1636" alt="Screenshot 2024-06-30 at 5 08 30 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/118093b7-bd6f-4a43-848e-0e1d1832a2a7">
+
 [video]()
 
 SonarQube scanner
