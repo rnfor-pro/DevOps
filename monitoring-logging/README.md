@@ -338,8 +338,19 @@ Go to Manage jenkins --> tools --> `SonarQube Scanner installations`
 
 [video]()
 
-In the Sonarqube Dashboard add a quality gate also
+In the Sonarqube Dashboard add a quality gate.
+<img width="1422" alt="Screenshot 2024-06-30 at 6 20 14 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/f378ba8b-65f6-473a-9bc0-5ae23cdbce0c">
 
+<img width="968" alt="Screenshot 2024-06-30 at 6 21 19 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/b6fee4d2-7a3b-480a-a5cd-1a6a291ae216">
+
+<img width="1449" alt="Screenshot 2024-06-30 at 6 22 01 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/c3f27e11-5455-4c42-b690-a2b159a06426">
+
+<img width="1515" alt="Screenshot 2024-06-30 at 6 23 13 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/2e0c7ae6-b676-41ff-bd46-4e2108be980e">
+
+<img width="1624" alt="Screenshot 2024-06-30 at 6 24 30 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/85dd3e0d-1ada-4f81-b341-a803a092bbe2">
+
+
+Create a webhook by giving jenkins url to sonarqube so they can connect.
 `
 Administration–> Configuration–>Webhooks
 `
