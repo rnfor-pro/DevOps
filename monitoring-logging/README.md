@@ -323,7 +323,7 @@ Now, go to Dashboard → Manage Jenkins → System --> scroll down to `SonarQube
 
 <img width="1313" alt="Screenshot 2024-06-30 at 5 40 45 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/49d7db8a-cde8-461e-95e1-8134485318ca">
 
-<img width="1313" alt="Screenshot 2024-06-30 at 5 40 45 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/90d975a9-b400-4f84-a3e6-7624166000aa">
+<img width="1476" alt="Screenshot 2024-06-30 at 5 44 39 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/008056f2-ec06-4f86-b667-13b1e6888db7">
 
 
 [video]()
