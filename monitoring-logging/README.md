@@ -545,6 +545,7 @@ stage('Deploy to container'){
 EKS
 ---
 To follow along in our continuous delivery steps with `ArgoCD` forllow the link below to set up an EKS cluster
+
 [steps here](https://github.com/rnfor-pro/monitoring-logging/blob/main/kube-EKS/README.md)
 
 Install helm [here](https://helm.sh/docs/intro/install/)
