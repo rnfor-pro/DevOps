@@ -442,6 +442,9 @@ For version go with `dependency-check 6.5.1`
 
 Click on Apply and Save.
 
+<img width="1573" alt="Screenshot 2024-07-01 at 9 18 15 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/26671ee6-6bf6-4068-b0d7-9257f9aa44d0">
+<img width="1559" alt="Screenshot 2024-07-01 at 9 20 25 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/f2ed08e6-2749-4f6e-9d52-60452c943097">
+
 Now go configure → Pipeline and add this stage to your pipeline and build.
 
 ```
@@ -461,8 +464,13 @@ stage('OWASP FS SCAN') {
 Docker Image Build and Push
 ---
 Now, goto Dashboard → Manage Jenkins → Tools → Docker installation
+<img width="1645" alt="Screenshot 2024-07-01 at 9 24 09 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/012c527f-5bb5-4a2f-8341-4197af699b84">
 
 Add DockerHub Username and Password under Global Credentials [video]()
+Manage Jenkins --> Credentials --> System --> Credentials --> Global credentials (unrestricted) --> add credentials
+<img width="1593" alt="Screenshot 2024-07-01 at 9 55 04 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/fe7fe0c9-750d-42c5-8060-1219b1cb0556">
+
+We are not going to configure system because our dockerhub repositor is public
 
 Add this stage to Pipeline Script and build
 ```
