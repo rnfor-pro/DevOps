@@ -544,10 +544,8 @@ stage('Deploy to container'){
 
 EKS
 ---
-
-The Terraform script provisions an Amazon EKS cluster on AWS, along with associated resources. We create IAM roles and policies, defining permissions for EKS and the associated node group. VPC and subnet information is retrieved, and an EKS cluster is established, linking it to the specified VPC and subnets. Additionally, we create an EKS node group, configuring instance types, scaling, and associating it with the EKS cluster.
-
- [steps here](https://github.com/rnfor-pro/monitoring-logging/blob/main/kube-EKS/README.md)
+To follow along in our continuous delivery steps with `ArgoCD` forllow the link below to set up an EKS cluster
+[steps here](https://github.com/rnfor-pro/monitoring-logging/blob/main/kube-EKS/README.md)
 
 Install helm [here](https://helm.sh/docs/intro/install/)
 
@@ -555,8 +553,7 @@ Install helm [here](https://helm.sh/docs/intro/install/)
 
 ArgoCD
 ---
-
-Then install ArgoCD. ArgoCD is a declarative, GitOps continuous delivery tool for Kubernetes. It allows users to maintain and manage Kubernetes applications using Git repositories as the source of truth for the desired application state. ArgoCD automates the deployment, monitoring, and lifecycle management of applications in Kubernetes clusters.
+ArgoCD is a declarative, GitOps continuous delivery tool for Kubernetes. It allows users to maintain and manage Kubernetes applications using Git repositories as the source of truth for the desired application state. ArgoCD automates the deployment, monitoring, and lifecycle management of applications in Kubernetes clusters.
 
 ```
 kubectl create namespace argocd
