@@ -632,9 +632,32 @@ To login, default username is “admin” but we’ll need to fetch the password
 export ARGO_PWD=`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 echo $ARGO_PWD
 ```
+<img width="1593" alt="Screenshot 2024-07-01 at 1 11 52 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/9a339cd4-cd02-4c8e-b168-5df373762e0b">
 [video]()
 
-Let’s connect ArgoCD to our repo. Navigate to Settings → Repositories → Connect Repo Using HTTPS
+Let’s connect ArgoCD to our repo.
+---
+
+Navigate to Settings → Repositories → Connect Repo Using HTTPS
+<img width="1440" alt="Screenshot 2024-07-01 at 1 16 59 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/d55656df-0d8d-4e43-8f81-4563c2e230b6">
+<img width="1440" alt="Screenshot 2024-07-01 at 1 16 59 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/3356dd1e-9325-4ccc-a873-8d6ff34bcb19">
+
+
+<img width="1626" alt="Screenshot 2024-07-01 at 1 25 42 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/e85fea58-5f67-45af-91e3-7dbe48a85239">
+Click on `connect` .
+
+<img width="1472" alt="Screenshot 2024-07-01 at 1 28 56 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/00768ab5-4c58-4939-b819-3e8e4f82e401">
+
+Create new app which will fetch the data present in the `kubernetes` folder in github
+<img width="1657" alt="Screenshot 2024-07-01 at 1 33 31 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/2b75913d-6e84-443b-bf47-b21066893dc5">
+
+<img width="1642" alt="Screenshot 2024-07-01 at 1 37 12 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/faf8ab5e-914a-4d87-a537-70e0d38f46f2">
+
+For `Cluster URL` enter `https://kubernetes.default.svc`
+
+
+
+
 
 Next, we head to Manage Applications → New App
 
