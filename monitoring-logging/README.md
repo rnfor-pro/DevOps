@@ -467,10 +467,48 @@ Now, goto Dashboard → Manage Jenkins → Tools → Docker installation
 <img width="1645" alt="Screenshot 2024-07-01 at 9 24 09 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/012c527f-5bb5-4a2f-8341-4197af699b84">
 
 Add DockerHub Username and Password under Global Credentials [video]()
+
 Manage Jenkins --> Credentials --> System --> Credentials --> Global credentials (unrestricted) --> add credentials
 <img width="1593" alt="Screenshot 2024-07-01 at 9 55 04 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/fe7fe0c9-750d-42c5-8060-1219b1cb0556">
 
 We are not going to configure system because our dockerhub repositor is public
+
+Create an account with [the movie database](https://www.themoviedb.org/?language=en-US)
+Next, we will create a TMDB API key
+
+Open a new tab in the Browser and search for TMDB
+<img width="1444" alt="Screenshot 2024-07-01 at 10 21 19 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/32fcbcc8-28a6-436b-8a35-b46f5376c56b">
+Click on the first result, you will see this page
+
+Click on the Login on the top right. You will get this page.
+
+You need to create an account here. click on click here. I have account that’s why i added my details in the username and passwod tab.
+<img width="1602" alt="Screenshot 2024-07-01 at 10 42 04 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/8da63710-7e37-4ea8-9e50-09c11bdb825a">
+
+once you create an account you will see this page.
+<img width="1608" alt="Screenshot 2024-07-01 at 10 25 02 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/8a310b7f-0dd2-4769-87dd-0cfdd8851e67">
+
+Let’s create an API key, By clicking on your profile and clicking settings.
+<img width="1574" alt="Screenshot 2024-07-01 at 10 25 37 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/8cf69788-5ca5-4bae-b8f8-ca0e7b60c89e">
+
+Now click on API from the left side panel.
+<img width="159" alt="Screenshot 2024-07-01 at 10 33 18 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/81ad7001-1eb5-4f45-955f-5b23f8ad8042">
+
+Now click on create
+<img width="773" alt="Screenshot 2024-07-01 at 10 34 04 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/dfb8fa26-72af-452c-8ab0-f4d2bc945700">
+
+Click on Developer
+<img width="773" alt="Screenshot 2024-07-01 at 10 34 30 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/15d347c9-4e48-4d17-8ff4-20e6300501d7">
+
+Accept the terms and conditions.
+<img width="781" alt="Screenshot 2024-07-01 at 10 34 55 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/d7a4a07f-10cb-4016-ae58-202df7ab6612">
+
+Provide basic details
+<img width="822" alt="Screenshot 2024-07-01 at 10 36 32 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/a77f7884-12d7-441c-85f7-f15643b910fc">
+
+Click on submit and you will get your API key.
+<img width="1394" alt="Screenshot 2024-07-01 at 10 37 11 AM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/1c228602-e72a-4a05-82d8-1cb3110c54f8">
+
 
 Add this stage to Pipeline Script and build
 ```
