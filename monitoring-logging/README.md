@@ -656,10 +656,9 @@ Create new app which will fetch the data present in the `kubernetes` folder in g
 For `Cluster URL` enter `https://kubernetes.default.svc`
 
 
-
-
-
 Next, we head to Manage Applications → New App
+
+<img width="1652" alt="Screenshot 2024-07-01 at 1 51 57 PM" src="https://github.com/rnfor-pro/playlist_2/assets/67124388/b29804ca-bf2a-45b6-88cd-3418e36e5502">
 
 We’ll access the application through the `node public IP on port 30007` (ensure you enable port 30007 on the Node Cluster Security Group).
 
