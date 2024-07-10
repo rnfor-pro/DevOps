@@ -97,7 +97,7 @@ resource "aws_instance" "netflix_server" {
 }
 
 resource "aws_eip" "netflix_elastic_ip" {
-  vpc      = true
+  vpc = true
   instance = aws_instance.netflix_server.id
 }
 
