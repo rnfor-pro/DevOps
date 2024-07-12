@@ -1,4 +1,4 @@
-# Install WS
+# Install WSL
 ---
 
 go to the search bar on your laptop and type powershell right click and select `run as administartor`
