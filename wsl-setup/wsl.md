@@ -62,4 +62,17 @@ brew tap hashicorp/tap
 ```bash
 brew install hashicorp/tap/terraform
 ```
+## hints
+If you run into an error such as `zsh: command not found brew` follow the steps below to install brew
+
+Copy and paste the following command into the terminal and then press Enter
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
+```
+
+Verify Installation
+```bash
+brew doctor
+```
 
