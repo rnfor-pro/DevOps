@@ -1,4 +1,5 @@
 # Install WSL
+# Windows
 ---
 
 go to the search bar on your laptop and type powershell right click and select `run as administartor`
@@ -50,5 +51,15 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://
 ```
 ```bash
 sudo apt update && sudo apt install terraform
+```
+
+
+# mac users
+```bash
+brew tap hashicorp/tap
+```
+
+```bash
+brew install hashicorp/tap/terraform
 ```
 
