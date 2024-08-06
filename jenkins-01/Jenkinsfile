@@ -6,15 +6,20 @@ pipeline {
   stages{
     stage('1-cloning project repo'){
       steps{
-        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/rnfor-pro/jenkins-01.git']])
+        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/mpndevops10/DevOps.git']])
       }
     }
-    stage('2-cleanws'){
+    stage('2-cd into jenkins-01 directory'){
+      steps{
+        sh 'cd jenkins-01'
+      }
+    }
+    stage('3-cleanws'){
       steps{
         sh 'mvn clean'
       }
     }
-    stage('3-mavenbuild'){
+    stage('4-mavenbuild'){
       steps{
         sh 'mvn package'
       }

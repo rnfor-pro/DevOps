@@ -16,7 +16,7 @@ variable "key_name" {
 
 variable "tomcat_ami_id" {
   default = "ami-0b4750268a88e78e0"
-} 
+}
 
 variable "tomcat_instance_type" {
   default = "t2.micro"
