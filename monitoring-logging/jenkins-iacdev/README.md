@@ -11,7 +11,7 @@
    git clone https://github.com/rnfor-pro/DevOps.git
    ```
 2. ```
-   cd DevOps/monitoring-logging/jenkins-master-slave-iac
+   cd DevOps/monitoring-logging/jenkins-iacdev
    ```
 ---   
 3. edit terraform.tfvars file and change the buckete name and the region to meet your need. 
