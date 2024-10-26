@@ -3,20 +3,20 @@
 #### How to connect to my ec2 server created by terraform?
 - As usual go to aws and copy the public ip address then enter it on your browser ($public_ip:8080)
 
-#### PLEASE MAKE SURE YOU CREAT YOUR OWN KEY PAIR DO NOT USE 'devtf-key'
+#### PLEASE MAKE SURE YOU CREATE YOUR OWN KEY PAIR DO NOT USE 'devtf-key'
 
 # How to use this project?
-1. From your wsl, run:
+1. From your visual studio, run:
    ```
-   git clone https://github.com/etechConsultingDevops/jenkins-infra-iac
+   git clone https://github.com/rnfor-pro/DevOps.git
    ```
 2. ```
-   cd jenkins-iacdev
+   cd DevOps/monitoring-logging/jenkins-master-slave-iac
    ```
 ---   
-3. edit terraform.tfvars file and change the bucket name to meet your need. 
+3. edit terraform.tfvars file and change the buckete name and the region to meet your need. 
 
-    `Do NOT change the AMI unless you change the region in variables.tf file.`
+    `Do NOT change the AMI unless you change the region.`
 ---    
 
 4. Run:
