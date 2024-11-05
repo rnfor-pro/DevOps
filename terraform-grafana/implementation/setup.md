@@ -102,3 +102,48 @@ terraform {
 }
 
 ```
+
+2. Folder and Dashboard Configuration:
+- Create a file named main.tf to configure your Grafana folder and dashboard resources.
+
+- This example assumes a dashboard JSON file will be placed in a dashboards folder.
+
+3. Define Variables:
+- Create a variables.tf file to define variables for reusability.
+
+4. Create a Dashboard JSON File:
+- Create a dashboards folder in the root directory of your project:
+
+```bash
+mkdir dashboards
+```
+- Place your dashboard JSON file (e.g., mydashboard.json) in this folder.
+
+### Step 4: Initialize and Apply Terraform
+1. Initialize Terraform:
+- In your project directory, run:
+
+```bash
+terraform init
+```
+
+- This will download the necessary Grafana provider plugins.
+2. Review the Terraform Plan:
+- Before applying, run a plan to see what resources will be created:
+
+```bash
+terraform plan
+```
+3. Apply the Terraform Configuration:
+
+- Run the following command to apply the configuration and create the Grafana folder and dashboard:
+
+```bash
+terraform apply
+```
+
+### Step 5: Verify in Grafana
+- Go to your Grafana instance, and check the “stage” folder (or whatever folder name you set) to confirm that the dashboard was created as expected.
+
+
+
