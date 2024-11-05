@@ -19,5 +19,5 @@ variable "grafana_endpoint" {
 variable "grafana_service_account_api_key" {
   type        = string
   description = "Define API key to conect Grafana instance"
-  default     = "glsa_NHQXF7YnNgud2qsp3ydo206as8kQkPHf_d3ee5b36"
+  default     = ""
 }
