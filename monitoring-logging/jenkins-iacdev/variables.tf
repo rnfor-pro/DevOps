@@ -18,12 +18,12 @@ variable "key_name" {
   type    = string
 }
 
-variable "bucket" {
-  default = ""
-  type    = string
-}
+# variable "bucket" {
+#   default = ""
+#   type    = string
+# }
 
-variable "acl" {
-  default = "private"
-  type    = string
-}
+# variable "acl" {
+#   default = "private"
+#   type    = string
+# }

@@ -51,25 +51,25 @@ resource "aws_security_group" "jenkins-sg" {
   }
 }
 
-resource "aws_s3_bucket" "my-s3-bucket" {
-  bucket = var.bucket
+# resource "aws_s3_bucket" "my-s3-bucket" {
+#   bucket = var.bucket
 
-  tags = {
-    Name = "CICD-project"
-  }
-}
+#   tags = {
+#     Name = "CICD-project"
+#   }
+# }
 
 
-resource "aws_s3_bucket_acl" "s3_bucket_acl" {
-  bucket     = aws_s3_bucket.my-s3-bucket.id
-  acl        = var.acl
-  depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_acl_ownership]
-}
+# resource "aws_s3_bucket_acl" "s3_bucket_acl" {
+#   bucket     = aws_s3_bucket.my-s3-bucket.id
+#   acl        = var.acl
+#   depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_acl_ownership]
+# }
 
-# Resource to avoid error "AccessControlListNotSupported: The bucket does not allow ACLs"
-resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
-  bucket = aws_s3_bucket.my-s3-bucket.id
-  rule {
-    object_ownership = "ObjectWriter"
-  }
-}
+# # Resource to avoid error "AccessControlListNotSupported: The bucket does not allow ACLs"
+# resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
+#   bucket = aws_s3_bucket.my-s3-bucket.id
+#   rule {
+#     object_ownership = "ObjectWriter"
+#   }
+# }
