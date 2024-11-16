@@ -51,5 +51,5 @@ sudo systemctl enable jenkins
 # sudo dpkg --list | grep -i jdk
 
 echo "------------changing hostname--------------"
-sudo hostnamectl set-hostname jenkins_server
+sudo hostnamectl set-hostname jenkins-svr
 bash
