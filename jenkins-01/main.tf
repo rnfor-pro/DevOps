@@ -64,6 +64,7 @@ resource "aws_instance" "tomcat" {
   key_name                     = var.tomcat_key
   associate_public_ip_address  = true
   vpc_security_group_ids       = [aws_security_group.jenkins_sg.id]
+  user_data                   = "${file("install_tomcat.sh")}"
 
   tags = {
     Name = "tomcat"
