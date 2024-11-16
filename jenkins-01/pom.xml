@@ -5,18 +5,32 @@
   <artifactId>maven-enterprise-application</artifactId>
   <packaging>pom</packaging>
   <version>1.0</version>
-  <name> Maven Enterprise Application</name>
+  <name>Maven Enterprise Application</name>
   <url>http://maven.apache.org</url>
+
   <modules>
     <module>MavenEnterpriseApp-ear</module>
     <module>MavenEnterpriseApp-web</module>
   </modules>
-  
+
   <properties>
-	<!-- versions -->
-	<sonar.host.url>http://localhost:9000/</sonar.host.url>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-</properties>
-  
+    <sonar.host.url>http://localhost:9000/</sonar.host.url>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${maven-war-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
 </project>
+
