@@ -2,7 +2,7 @@
 #Author:Prof Elvis N
 #Company: Etech Co. llc
 sudo apt update
-sudo apt install default-jdk -y
+sudo apt-get install openjdk-11-jdk
 sudo groupadd tomcat
 sudo useradd -g tomcat -d /opt/tomcat -s /bin/false tomcat
 sudo mkdir -p /opt/tomcat
