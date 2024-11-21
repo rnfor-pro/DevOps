@@ -9,15 +9,15 @@ variable "dashboard_file_path" {
   type        = string
   default     = "dashboards/"
 }
-variable "grafana_endpoint" {
-  type        = string
-  description = "Define Endpoint of Grafana"
-  default     = "http://terraformgrafana.therednosehomebuyers.com:3000/"
-}
+# variable "grafana_endpoint" {
+#   type        = string
+#   description = "Define Endpoint of Grafana"
+#   default     = "http://localhost:3000/"
+# }
 
 
-variable "grafana_service_account_api_key" {
-  type        = string
-  description = "Define API key to conect Grafana instance"
-  default     = ""
-}
+# variable "grafana_service_account_api_key" {
+#   type        = string
+#   description = "Define API key to conect Grafana instance"
+#   default     = "glsa_tHyIGbTRq4GauhM5SYMul7wqg7Abed5F_8de399ba"
+# }
