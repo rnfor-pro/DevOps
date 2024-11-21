@@ -5,6 +5,7 @@ This document provides a guide to using Terraform to create and manage Grafana d
 ---
 
 ## Prerequisites
+[If using a docker container to run locally on Mac](https://stackoverflow.com/questions/44346109/how-to-easily-install-and-uninstall-docker-on-macos#:~:text=122-,By%20command%20line,-INSTALL) 
 
 ### For Windows Users
 
