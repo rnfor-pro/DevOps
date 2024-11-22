@@ -105,5 +105,34 @@ docker-compose restart prometheus
 - Default username is: admin
 - Password is: your_password
 
+## To monitor my Docker environment
 
+Add cAdvisor to your docker-compose.yml:
+```yaml
+cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Add only if containers run on Mac
+    networks:
+      - monitoring
+```
+Update Prometheus configuration to scrape cAdvisor metrics
+
+```yaml
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080'] 
+```
+Restart your containers
+```bash
+docker-compose up -d
+```
+
+Create a Docker-specific dashboard in Grafana using cAdvisor metrics
 
