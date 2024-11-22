@@ -1,7 +1,7 @@
 
 provider "grafana" {
-  url   = "http://localhost:3000/"
-  auth = "glsa_CJQgErwQMJaImSXEgqiUC54ihsljN6xj_370c0b10"
+  url  = var.grafana_endpoint
+  auth = var.grafana_service_account_api_key
 }
 
 
@@ -13,6 +13,16 @@ resource "grafana_dashboard" "deploy_dashboard" {
   for_each    = fileset("${var.dashboard_file_path}", "**")
   config_json = file("${var.dashboard_file_path}/${each.key}")
   folder      = grafana_folder.create_folder_on_grafana.id
+}
+
+resource "grafana_data_source" "promethues" {
+  type = var.data_source_type
+  name = var.data_source_name
+  url  = var.prometheus_url
+
+  lifecycle {
+    ignore_changes = [json_data_encoded, http_headers]
+  }
 }
 
 

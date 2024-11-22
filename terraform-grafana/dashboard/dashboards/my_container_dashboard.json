@@ -1,0 +1,169 @@
+{
+  "__inputs": [
+    {
+      "name": "prometheus",
+      "label": "prometheus",
+      "description": "Prometheus as the data source",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "id": null,
+  "title": "Docker Monitoring",
+  "description": "Monitoring Docker containers using Prometheus and cAdvisor",
+  "tags": ["docker", "monitoring"],
+  "timezone": "browser",
+  "schemaVersion": 16,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "singlestat",
+      "title": "Running Containers",
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": "prometheus",
+      "targets": [
+        {
+          "expr": "count(container_last_seen)",
+          "refId": "A"
+        }
+      ],
+      "format": "none",
+      "valueName": "current"
+    },
+    {
+      "type": "singlestat",
+      "title": "Total Memory Usage",
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "datasource": "prometheus",
+      "targets": [
+        {
+          "expr": "sum(container_memory_usage_bytes)/1024/1024",
+          "refId": "A"
+        }
+      ],
+      "format": "mbytes",
+      "valueName": "current"
+    },
+    {
+      "type": "graph",
+      "title": "CPU Usage (Rate)",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "datasource": "prometheus",
+      "targets": [
+        {
+          "expr": "rate(container_cpu_user_seconds_total[5m])",
+          "refId": "A"
+        }
+      ],
+      "xaxis": {
+        "show": true
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": "CPU Usage",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Memory Usage Over Time",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "datasource": "prometheus",
+      "targets": [
+        {
+          "expr": "container_memory_usage_bytes",
+          "refId": "A"
+        }
+      ],
+      "xaxis": {
+        "show": true
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": "Memory Usage",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Network RX/TX",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "datasource": "prometheus",
+      "targets": [
+        {
+          "expr": "rate(container_network_receive_bytes_total[5m])",
+          "refId": "A",
+          "legendFormat": "Receive"
+        },
+        {
+          "expr": "rate(container_network_transmit_bytes_total[5m])",
+          "refId": "B",
+          "legendFormat": "Transmit"
+        }
+      ],
+      "xaxis": {
+        "show": true
+      },
+      "yaxes": [
+        {
+          "format": "bps",
+          "label": "Network Bandwidth",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ]
+    }
+  ],
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  }
+}

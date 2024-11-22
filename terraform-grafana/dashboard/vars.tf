@@ -9,15 +9,34 @@ variable "dashboard_file_path" {
   type        = string
   default     = "dashboards/"
 }
-# variable "grafana_endpoint" {
-#   type        = string
-#   description = "Define Endpoint of Grafana"
-#   default     = "http://localhost:3000/"
-# }
+variable "grafana_endpoint" {
+  type        = string
+  description = "Endpoint of Grafana service"
+  default     = ""
+}
 
 
-# variable "grafana_service_account_api_key" {
-#   type        = string
-#   description = "Define API key to conect Grafana instance"
-#   default     = "glsa_tHyIGbTRq4GauhM5SYMul7wqg7Abed5F_8de399ba"
-# }
+variable "grafana_service_account_api_key" {
+  type        = string
+  description = "Endpoint of Promethues service"
+  default     = ""
+}
+
+
+variable "prometheus_url" {
+  description = "The URL for the Grafana instance"
+  type        = string
+  default     = ""
+}
+
+variable "data_source_name" {
+  description = "The name of the Prometheus data source in Grafana"
+  type        = string
+  default     = "prometheus"
+}
+
+variable "data_source_type" {
+  description = "The type of data source to configure in Grafana"
+  type        = string
+  default     = "prometheus"
+}
