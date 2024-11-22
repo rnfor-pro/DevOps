@@ -1,15 +1,5 @@
-terraform-grafana
-├── dashboards
-│   ├── my_containers_dashboard.json        
-│   ├── mydashboard1.json     
-│   └── mydashboard2                   
-├── README.md                
-├── main.tf 
-├── vars.tf                
-├── providers.tf
-├── outputs.tf 
-├── terraform.tfvars
-
+# Terraform
+Terraform is an infrastructure as code tool that lets you build, change, and version cloud and on-prem resources safely and efficiently.
 
 Initialize the Terraform working directory, download and install provider's plugins.
 ```bash
