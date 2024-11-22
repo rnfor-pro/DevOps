@@ -1,7 +1,13 @@
-variable "grafana_dashboard_folder_name" {
+variable "digital-entdevs-obsevltyg-dev-001" {
   description = "Folder name created on grafana istance"
   type        = string
   default     = "stage"
+}
+
+variable "digital-entdevs-obsevltyg-dev-002" {
+  description = "Folder name created on grafana istance"
+  type        = string
+  # default     = "uat"
 }
 
 variable "dashboard_file_path" {

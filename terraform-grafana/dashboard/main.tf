@@ -5,14 +5,18 @@ provider "grafana" {
 }
 
 
-resource "grafana_folder" "create_folder_on_grafana" {
-  title = var.grafana_dashboard_folder_name
+resource "grafana_folder" "digital-entdevs-obsevltyg-dev-001" {
+  title = var.digital-entdevs-obsevltyg-dev-001
+}
+
+resource "grafana_folder" "digital-entdevs-obsevltyg-dev-002" {
+  title = var.digital-entdevs-obsevltyg-dev-002
 }
 
 resource "grafana_dashboard" "deploy_dashboard" {
   for_each    = fileset("${var.dashboard_file_path}", "**")
   config_json = file("${var.dashboard_file_path}/${each.key}")
-  folder      = grafana_folder.create_folder_on_grafana.id
+  folder      = grafana_folder.digital-entdevs-obsevltyg-dev-001.id
 }
 
 resource "grafana_data_source" "promethues" {
