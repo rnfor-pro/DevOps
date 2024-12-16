@@ -1,17 +1,3 @@
-global:
-  scrape_interval: 15s
-
-scrape_configs:
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['prometheus:9090'] 
-
-  - job_name: 'grafana'
-    static_configs:
-      - targets: ['grafana:3000'] 
-  - job_name: 'cadvisor'
-    static_configs:
-      - targets: ['cadvisor:8080'] 
 
 
     

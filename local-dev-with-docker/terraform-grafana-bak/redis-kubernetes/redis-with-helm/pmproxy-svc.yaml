@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pmproxy
+  namespace: pcp
+spec:
+  selector:
+    app: pmproxy
+  ports:
+  - protocol: TCP
+    port: 44322 # Updated to match pmproxy REST API default
+    targetPort: 44322
+    nodePort: 30423
+  type: NodePort

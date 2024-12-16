@@ -1,0 +1,38 @@
+global:
+  redis:
+    password: "a-very-secure-password"
+
+auth:
+  enabled: true
+  password: "a-very-secure-password"
+
+master:
+  persistence:
+    enabled: true
+    size: 10Gi
+  service:
+    type: ClusterIP
+
+replica:
+  persistence:
+    enabled: true
+    size: 10Gi
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      release: prometheus
+
+grafana:
+  enabled: true
+  admin:
+    password: "grafana-admin-password"
+
+prometheus:
+  enabled: true
+  server:
+    persistentVolume:
+      enabled: true
+      size: 10Gi
