@@ -1,0 +1,55 @@
+global:
+  redis:
+    password: "complex-redis-password" 
+
+architecture: replication
+
+auth:
+  enabled: true
+  password: "complex-redis-password" 
+
+master:
+  count: 1
+  persistence:
+    enabled: true
+    storageClass: "default" # To be adjusted based on our storage class
+    size: 8Gi
+  service:
+    type: ClusterIP
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 5
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+    successThreshold: 1
+
+replica:
+  replicaCount: 2
+  persistence:
+    enabled: true
+    storageClass: "default" # To be adjusted based on our storage class
+    size: 8Gi
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 5
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+    successThreshold: 1
+
+namespaceOverride: "dev-redis"
