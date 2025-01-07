@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: redis
+  namespace: redis
 spec:
   serviceName: redis
   replicas: 3
@@ -20,12 +21,10 @@ spec:
         args:
           - |
             cp /tmp/redis/redis.conf /etc/redis/redis.conf
-            
             echo "finding master..."
-            MASTER_FDQN=`hostname  -f | sed -e 's/redis-[0-9]\./redis-0./'`
+            MASTER_FDQN=`hostname -f | sed -e 's/redis-[0-9]\./redis-0./'`
             if [ "$(redis-cli -h sentinel -p 5000 ping)" != "PONG" ]; then
               echo "master not found, defaulting to redis-0"
-
               if [ "$(hostname)" = "redis-0" ]; then
                 echo "this is redis-0, not updating config..."
               else
@@ -39,10 +38,11 @@ spec:
               echo "replicaof $MASTER 6379" >> /etc/redis/redis.conf
             fi
         volumeMounts:
-        - name: redis-config
-          mountPath: /etc/redis/
-        - name: config
-          mountPath: /tmp/redis/
+          - name: redis-config
+            mountPath: /etc/redis/
+          - name: config
+            mountPath: /tmp/redis/
+
       containers:
       - name: redis
         image: redis:7.0.10-alpine
@@ -59,23 +59,28 @@ spec:
       volumes:
       - name: redis-config
         emptyDir: {}
+      # THIS is where we reference your ConfigMap's key
       - name: config
         configMap:
           name: redis-config
+          items:
+          - key: redis.conf
+            path: redis.conf
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "standard"
+      storageClassName: "gp2"
       resources:
         requests:
-          storage: 64Mi
+          storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: redis
+  namespace: redis
 spec:
   clusterIP: None
   ports:

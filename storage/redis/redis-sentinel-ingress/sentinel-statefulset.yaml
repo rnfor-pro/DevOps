@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sentinel
+  namespace: redis
 spec:
   serviceName: sentinel
   replicas: 3
@@ -70,15 +71,16 @@ spec:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "standard"
+      storageClassName: "gp2"
       resources:
         requests:
-          storage: 64Mi
+          storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: sentinel
+  namespace: redis
 spec:
   clusterIP: None
   ports:

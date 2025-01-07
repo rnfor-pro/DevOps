@@ -1,0 +1,17 @@
+controller:
+  extraArgs:
+    tcp-services-configmap: "ingress-nginx/tcp-services"
+
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    externalTrafficPolicy: "Cluster"
+    extraPorts:
+      - name: redis-tcp
+        port: 6379
+        targetPort: 6379
+        protocol: TCP
+      - name: sentinel-tcp
+        port: 5000
+        targetPort: 5000
+        protocol: TCP
