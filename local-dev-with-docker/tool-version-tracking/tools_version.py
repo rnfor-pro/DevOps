@@ -17,7 +17,7 @@ def install_and_import(package):
 # Ensure 'requests' is installed
 install_and_import("requests")
 
-# Namespace and output file
+# Namespaces and output file
 NAMESPACES = ["prod-keystone", "np-keystone"]
 OUTPUT_FILE = "observability_tools_versions.json"
 
@@ -129,7 +129,7 @@ def show_progress(current, total):
 
 def main():
     results = []
-    processed_local_tool_names = set()  # Track local_tool_names to avoid duplicates
+    processed_local_names = set()  # Track local_tool_name to avoid duplicates
 
     for namespace in NAMESPACES:
         # Get StatefulSets and Deployments
@@ -141,15 +141,11 @@ def main():
         current = 0
 
         for name, images in all_images:
-            # First, check if this name was processed before
-            # If yes, skip entirely
-            if name in processed_local_tool_names:
+            # If this local_tool_name was already processed, skip it
+            if name in processed_local_names:
                 current += 1
                 show_progress(current, total)
                 continue
-
-            # Otherwise, process this local_tool_name
-            patched_name = name  # Base local_tool_name
 
             for image in images:
                 tool_name, github_repo = identify_tool_and_repo(image, name)
@@ -157,8 +153,9 @@ def main():
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
                 # If the image contains "grafana-image-renderer", append "-image-renderer"
+                patched_name = name
                 if "grafana-image-renderer" in image.lower():
-                    patched_name = name + "-image-renderer"
+                    patched_name += "-image-renderer"
 
                 results.append({
                     "namespace": namespace,
@@ -169,7 +166,8 @@ def main():
                     "image": image
                 })
 
-            processed_local_tool_names.add(name)  # Mark as processed
+            # Mark this local_tool_name as processed
+            processed_local_names.add(name)
             current += 1
             show_progress(current, total)
 
