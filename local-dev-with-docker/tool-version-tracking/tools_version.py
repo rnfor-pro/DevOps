@@ -147,9 +147,14 @@ def main():
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
+                # Only change: Append '-image-renderer' if image contains "image renderer"
+                local_tool_name = name
+                if "image renderer" in image.lower():
+                    local_tool_name += "-image-renderer"
+
                 results.append({
                     "namespace": namespace,
-                    "local_tool_name": name,
+                    "local_tool_name": local_tool_name,
                     "tool_name": tool_name,
                     "current_version": current_version,
                     "latest_version": latest_version,
