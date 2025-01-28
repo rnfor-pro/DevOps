@@ -158,9 +158,11 @@ def main():
                 if "grafana-image-renderer" in image.lower():
                     patched_name += "-image-renderer"
 
-                # Append "-image-exporter" if the image contains "exporter"
+                # ----------------------- NEW ADDITION HERE -----------------------
+                # Append "-exporter" if the image contains "exporter"
                 if "exporter" in image.lower():
-                    patched_name += "-image-exporter"
+                    patched_name += "-exporter"
+                # ---------------------------------------------------------------
 
                 results.append({
                     "namespace": namespace,
