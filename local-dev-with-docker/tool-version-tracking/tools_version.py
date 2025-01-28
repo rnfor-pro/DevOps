@@ -115,20 +115,28 @@ def identify_tool_and_repo(image, name):
 
     return tool_name, repo
 
-# Minimal change: updated version extraction to handle Memcached images with suffix
+# Modified function to handle current_version extraction
 def get_current_version(image):
     match = re.search(r":([^:]+)$", image)
-    version_str = match.group(1) if match else "latest"
-    
-    # If the image name suggests Memcached or Memcached Exporter, try to extract
-    # only the numeric semantic version, ignoring suffixes like "-alpine".
-    if ("memcached" in image.lower()) or ("memcached_exporter" in image.lower()):
+    if not match:
+        return "latest"
+
+    version_str = match.group(1)
+
+    # Memcached or Memcached Exporter logic
+    if "memcached" in image.lower() or "memcached_exporter" in image.lower():
         ver_match = re.search(r"(\d+\.\d+\.\d+)", version_str)
         if ver_match:
             return ver_match.group(1)
-    
+        else:
+            return "latest"
+
+    # Otherwise, attempt to parse semantic versioning
     version = extract_semver(version_str)
-    return "latest" if version == "latest" else version
+    if version == "latest":
+        return "latest"
+
+    return version
 
 # Function to display a progress bar
 def show_progress(current, total):
@@ -155,7 +163,7 @@ def main():
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # Minimal change: append to local_tool_name if "exporter" or "image renderer" in the image
+                # Check if image name has 'exporter' or 'image renderer' and append accordingly
                 patched_name = name
                 if "exporter" in image.lower():
                     patched_name += "-exporter"
