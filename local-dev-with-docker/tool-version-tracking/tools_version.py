@@ -17,7 +17,7 @@ def install_and_import(package):
 # Ensure 'requests' is installed
 install_and_import("requests")
 
-# Namespaces and output file
+# Namespace and output file
 NAMESPACES = ["prod-keystone", "np-keystone"]
 OUTPUT_FILE = "observability_tools_versions.json"
 
@@ -129,7 +129,6 @@ def show_progress(current, total):
 
 def main():
     results = []
-    processed_names = set()  # Track local_tool_names to avoid duplicates
     processed_tools = set()
 
     for namespace in NAMESPACES:
@@ -142,21 +141,16 @@ def main():
         current = 0
 
         for name, images in all_images:
-            # Skip if we already processed this local_tool_name
-            if name in processed_names:
-                current += 1
-                show_progress(current, total)
-                continue
-
             for image in images:
                 tool_name, github_repo = identify_tool_and_repo(image, name)
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # Append "-exporter" if it's "docker.io/prom/memecached-exporter"
+                # Minimal change: if the image contains "grafana/grafana-image-renderer"
+                # append "-image-renderer" to the local_tool_name
                 patched_name = name
-                if "docker.io/prom/memecached-exporter" in image.lower():
-                    patched_name += "-exporter"
+                if "grafana/grafana-image-renderer" in image.lower():
+                    patched_name += "-image-renderer"
 
                 results.append({
                     "namespace": namespace,
@@ -168,8 +162,6 @@ def main():
                 })
 
                 processed_tools.add(tool_name)
-
-            processed_names.add(name)  # Mark this local_tool_name as processed
 
             current += 1
             show_progress(current, total)
