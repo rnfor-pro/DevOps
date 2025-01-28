@@ -51,7 +51,6 @@ def get_latest_version(repo, retries=3):
                 return extract_semver(data[0].get("name", "Unknown")) if data else "Unknown"
             return extract_semver(data.get("tag_name", "Unknown"))
         except requests.exceptions.RequestException as e:
-            # Handle rate limit or other request errors
             if response.status_code == 403 and "X-RateLimit-Reset" in response.headers:
                 reset_time = int(response.headers["X-RateLimit-Reset"])
                 wait_time = reset_time - int(time.time())
@@ -64,10 +63,6 @@ def get_latest_version(repo, retries=3):
 
 # Function to extract semantic versioning from a string
 def extract_semver(version):
-    """
-    Returns the first valid semantic version (MAJOR.MINOR.PATCH) found,
-    ignoring extra suffixes like '-alpine'.
-    """
     match = re.search(r"v?\d+\.\d+\.\d+", version)
     return match.group(0) if match else "latest"
 
@@ -120,17 +115,20 @@ def identify_tool_and_repo(image, name):
 
     return tool_name, repo
 
-# Function to get current version from the image
+# Minimal change: updated version extraction to handle Memcached images with suffix
 def get_current_version(image):
-    """
-    Extracts and returns only the semantic version from the image tag,
-    ignoring suffixes like '-alpine'.
-    """
     match = re.search(r":([^:]+)$", image)
-    version_tag = match.group(1) if match else "latest"
-    version = extract_semver(version_tag)
-    # If there's no valid semver, we'll return "latest" or the fallback from extract_semver
-    return version
+    version_str = match.group(1) if match else "latest"
+    
+    # If the image name suggests Memcached or Memcached Exporter, try to extract
+    # only the numeric semantic version, ignoring suffixes like "-alpine".
+    if ("memcached" in image.lower()) or ("memcached_exporter" in image.lower()):
+        ver_match = re.search(r"(\d+\.\d+\.\d+)", version_str)
+        if ver_match:
+            return ver_match.group(1)
+    
+    version = extract_semver(version_str)
+    return "latest" if version == "latest" else version
 
 # Function to display a progress bar
 def show_progress(current, total):
@@ -138,10 +136,9 @@ def show_progress(current, total):
     bar = f"[{'=' * (percent // 2)}{' ' * (50 - percent // 2)}] {percent}%"
     print(f"\r{bar}", end='', flush=True)
 
-# Main function
 def main():
     results = []
-    unique_resources = set()  # Track resource names to avoid duplicates
+    processed_tools = set()
 
     for namespace in NAMESPACES:
         # Get StatefulSets and Deployments
@@ -153,35 +150,29 @@ def main():
         current = 0
 
         for name, images in all_images:
-            # Skip if we've already processed this resource name in this run
-            if name in unique_resources:
-                current += 1
-                show_progress(current, total)
-                continue
-
             for image in images:
                 tool_name, github_repo = identify_tool_and_repo(image, name)
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # Append exporter or image_renderer to local_tool_name if image contains those keywords
-                local_tool_name = name
+                # Minimal change: append to local_tool_name if "exporter" or "image renderer" in the image
+                patched_name = name
                 if "exporter" in image.lower():
-                    local_tool_name += "-exporter"
-                if "image renderer" in image.lower().replace("-", " "):
-                    local_tool_name += "-image_renderer"
+                    patched_name += "-exporter"
+                if "image renderer" in image.lower():
+                    patched_name += "-image-renderer"
 
                 results.append({
                     "namespace": namespace,
-                    "local_tool_name": local_tool_name,
+                    "local_tool_name": patched_name,
                     "tool_name": tool_name,
                     "current_version": current_version,
                     "latest_version": latest_version,
                     "image": image
                 })
 
-            # Mark this resource name as processed
-            unique_resources.add(name)
+                processed_tools.add(tool_name)
+
             current += 1
             show_progress(current, total)
 
