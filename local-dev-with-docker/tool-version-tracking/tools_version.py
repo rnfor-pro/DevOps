@@ -158,6 +158,10 @@ def main():
                 if "grafana-image-renderer" in image.lower():
                     patched_name += "-image-renderer"
 
+                # Append "-image-exporter" if the image contains "exporter"
+                if "exporter" in image.lower():
+                    patched_name += "-image-exporter"
+
                 results.append({
                     "namespace": namespace,
                     "local_tool_name": patched_name,
@@ -166,12 +170,6 @@ def main():
                     "latest_version": latest_version,
                     "image": image
                 })
-                
-                # -----------------------------------------------------------------
-                # Minimal addition: if it's np-redpanda, break so it appears once.
-                if name == "np-redpanda":
-                    break
-                # -----------------------------------------------------------------
 
             # Mark this local_tool_name as processed after we've added it
             processed_local_names.add(name)
