@@ -146,10 +146,9 @@ def main():
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # Minimal change: if the image contains "grafana/grafana-image-renderer"
-                # append "-image-renderer" to the local_tool_name
+                # Minimal change: If the image contains "grafana-image-renderer", append "-image-renderer"
                 patched_name = name
-                if "grafana/grafana-image-renderer" in image.lower():
+                if "grafana-image-renderer" in image.lower():
                     patched_name += "-image-renderer"
 
                 results.append({
