@@ -17,7 +17,7 @@ def install_and_import(package):
 # Ensure 'requests' is installed
 install_and_import("requests")
 
-# Namespaces and output file
+# Namespace and output file
 NAMESPACES = ["prod-keystone", "np-keystone"]
 OUTPUT_FILE = "observability_tools_versions.json"
 
@@ -129,7 +129,7 @@ def show_progress(current, total):
 
 def main():
     results = []
-    processed_local_names = set()  # Track local_tool_name to avoid duplicates
+    processed_local_names = set()  # Keep track of which local_tool_name has been added to results
 
     for namespace in NAMESPACES:
         # Get StatefulSets and Deployments
@@ -141,18 +141,19 @@ def main():
         current = 0
 
         for name, images in all_images:
-            # If this local_tool_name was already processed, skip it
+            # If we've already used this local_tool_name, skip it
             if name in processed_local_names:
                 current += 1
                 show_progress(current, total)
                 continue
 
+            # Process each container image in this resource
             for image in images:
                 tool_name, github_repo = identify_tool_and_repo(image, name)
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # If the image contains "grafana-image-renderer", append "-image-renderer"
+                # Append "-image-renderer" if the image contains "grafana-image-renderer"
                 patched_name = name
                 if "grafana-image-renderer" in image.lower():
                     patched_name += "-image-renderer"
@@ -166,7 +167,7 @@ def main():
                     "image": image
                 })
 
-            # Mark this local_tool_name as processed
+            # Mark this local_tool_name as processed after we've added it
             processed_local_names.add(name)
             current += 1
             show_progress(current, total)
