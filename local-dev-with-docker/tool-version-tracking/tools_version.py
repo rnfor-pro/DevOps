@@ -129,10 +129,8 @@ def show_progress(current, total):
 
 def main():
     results = []
+    processed_names = set()  # Track local_tool_names to avoid duplicates
     processed_tools = set()
-
-    # Track np-redpanda to ensure it's returned once
-    processed_np_redpanda = False
 
     for namespace in NAMESPACES:
         # Get StatefulSets and Deployments
@@ -144,8 +142,8 @@ def main():
         current = 0
 
         for name, images in all_images:
-            # Skip np-redpanda if we've already processed it
-            if name == "np-redpanda" and processed_np_redpanda:
+            # Skip if we already processed this local_tool_name
+            if name in processed_names:
                 current += 1
                 show_progress(current, total)
                 continue
@@ -155,14 +153,9 @@ def main():
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # Append "-image-renderer" if it's a grafana/grafana-image-renderer image
-                # Append "-exporter" if it's prom/memecached-exporter or docker.io/prom/memecached-exporter
+                # Append "-exporter" if it's "docker.io/prom/memecached-exporter"
                 patched_name = name
-                lower_image = image.lower()
-                if "grafana/grafana-image-renderer" in lower_image:
-                    patched_name += "-image-renderer"
-                if ("prom/memecached-exporter" in lower_image or
-                    "docker.io/prom/memecached-exporter" in lower_image):
+                if "docker.io/prom/memecached-exporter" in image.lower():
                     patched_name += "-exporter"
 
                 results.append({
@@ -176,9 +169,7 @@ def main():
 
                 processed_tools.add(tool_name)
 
-            # Mark np-redpanda as processed
-            if name == "np-redpanda":
-                processed_np_redpanda = True
+            processed_names.add(name)  # Mark this local_tool_name as processed
 
             current += 1
             show_progress(current, total)
