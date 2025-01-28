@@ -166,6 +166,12 @@ def main():
                     "latest_version": latest_version,
                     "image": image
                 })
+                
+                # -----------------------------------------------------------------
+                # Minimal addition: if it's np-redpanda, break so it appears once.
+                if name == "np-redpanda":
+                    break
+                # -----------------------------------------------------------------
 
             # Mark this local_tool_name as processed after we've added it
             processed_local_names.add(name)
