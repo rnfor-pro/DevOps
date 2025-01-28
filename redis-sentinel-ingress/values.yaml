@@ -1,0 +1,21 @@
+# values.yaml
+controller:
+  # Make sure the Ingress Controller is exposed as a LoadBalancer on AWS
+  service:
+    type: LoadBalancer
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+
+  # Enable SSL passthrough (needed for raw TCP pass-through)
+  extraArgs:
+    enable-ssl-passthrough: ""
+
+  # This tells the controller which ConfigMap to use for TCP mappings
+  tcpConfigMapName: "ingress-nginx/tcp-services"
+
+  # If you want more than one replica:
+  replicaCount: 2
+
+# Optional settings, e.g. for metrics
+controllerMetrics:
+  enabled: true
