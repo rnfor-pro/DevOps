@@ -115,28 +115,11 @@ def identify_tool_and_repo(image, name):
 
     return tool_name, repo
 
-# Modified function to handle current_version extraction
+# Function to get current version from the image
 def get_current_version(image):
     match = re.search(r":([^:]+)$", image)
-    if not match:
-        return "latest"
-
-    version_str = match.group(1)
-
-    # Memcached or Memcached Exporter logic
-    if "memcached" in image.lower() or "memcached_exporter" in image.lower():
-        ver_match = re.search(r"(\d+\.\d+\.\d+)", version_str)
-        if ver_match:
-            return ver_match.group(1)
-        else:
-            return "latest"
-
-    # Otherwise, attempt to parse semantic versioning
-    version = extract_semver(version_str)
-    if version == "latest":
-        return "latest"
-
-    return version
+    version = extract_semver(match.group(1)) if match else "latest"
+    return "latest" if version == "latest" else version
 
 # Function to display a progress bar
 def show_progress(current, total):
@@ -144,6 +127,7 @@ def show_progress(current, total):
     bar = f"[{'=' * (percent // 2)}{' ' * (50 - percent // 2)}] {percent}%"
     print(f"\r{bar}", end='', flush=True)
 
+# Main function
 def main():
     results = []
     processed_tools = set()
@@ -163,16 +147,9 @@ def main():
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # Check if image name has 'exporter' or 'image renderer' and append accordingly
-                patched_name = name
-                if "exporter" in image.lower():
-                    patched_name += "-exporter"
-                if "image renderer" in image.lower():
-                    patched_name += "-image-renderer"
-
                 results.append({
                     "namespace": namespace,
-                    "local_tool_name": patched_name,
+                    "local_tool_name": name,
                     "tool_name": tool_name,
                     "current_version": current_version,
                     "latest_version": latest_version,
