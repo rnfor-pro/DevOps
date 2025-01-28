@@ -17,7 +17,7 @@ def install_and_import(package):
 # Ensure 'requests' is installed
 install_and_import("requests")
 
-# Namespace and output file
+# Namespaces and output file
 NAMESPACES = ["prod-keystone", "np-keystone"]
 OUTPUT_FILE = "observability_tools_versions.json"
 
@@ -127,10 +127,12 @@ def show_progress(current, total):
     bar = f"[{'=' * (percent // 2)}{' ' * (50 - percent // 2)}] {percent}%"
     print(f"\r{bar}", end='', flush=True)
 
-# Main function
 def main():
     results = []
     processed_tools = set()
+
+    # Track np-redpanda to ensure it's returned once
+    processed_np_redpanda = False
 
     for namespace in NAMESPACES:
         # Get StatefulSets and Deployments
@@ -142,19 +144,30 @@ def main():
         current = 0
 
         for name, images in all_images:
+            # Skip np-redpanda if we've already processed it
+            if name == "np-redpanda" and processed_np_redpanda:
+                current += 1
+                show_progress(current, total)
+                continue
+
             for image in images:
                 tool_name, github_repo = identify_tool_and_repo(image, name)
                 current_version = get_current_version(image)
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
-                # Only change: Append '-image-renderer' if image contains "image renderer"
-                local_tool_name = name
-                if "image renderer" in image.lower():
-                    local_tool_name += "-image-renderer"
+                # Append "-image-renderer" if it's a grafana/grafana-image-renderer image
+                # Append "-exporter" if it's prom/memecached-exporter or docker.io/prom/memecached-exporter
+                patched_name = name
+                lower_image = image.lower()
+                if "grafana/grafana-image-renderer" in lower_image:
+                    patched_name += "-image-renderer"
+                if ("prom/memecached-exporter" in lower_image or
+                    "docker.io/prom/memecached-exporter" in lower_image):
+                    patched_name += "-exporter"
 
                 results.append({
                     "namespace": namespace,
-                    "local_tool_name": local_tool_name,
+                    "local_tool_name": patched_name,
                     "tool_name": tool_name,
                     "current_version": current_version,
                     "latest_version": latest_version,
@@ -162,6 +175,10 @@ def main():
                 })
 
                 processed_tools.add(tool_name)
+
+            # Mark np-redpanda as processed
+            if name == "np-redpanda":
+                processed_np_redpanda = True
 
             current += 1
             show_progress(current, total)
