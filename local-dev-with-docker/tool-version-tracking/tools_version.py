@@ -129,7 +129,7 @@ def show_progress(current, total):
 
 def main():
     results = []
-    processed_tool_names = set()  # Track local_tool_name to avoid duplicates
+    processed_local_tool_names = set()  # Track local_tool_names to avoid duplicates
 
     for namespace in NAMESPACES:
         # Get StatefulSets and Deployments
@@ -141,11 +141,15 @@ def main():
         current = 0
 
         for name, images in all_images:
-            # Skip if local_tool_name (name) is already processed
-            if name in processed_tool_names:
+            # First, check if this name was processed before
+            # If yes, skip entirely
+            if name in processed_local_tool_names:
                 current += 1
                 show_progress(current, total)
                 continue
+
+            # Otherwise, process this local_tool_name
+            patched_name = name  # Base local_tool_name
 
             for image in images:
                 tool_name, github_repo = identify_tool_and_repo(image, name)
@@ -153,9 +157,8 @@ def main():
                 latest_version = get_latest_version(github_repo) if github_repo != "Unknown" else "Not Found"
 
                 # If the image contains "grafana-image-renderer", append "-image-renderer"
-                patched_name = name
                 if "grafana-image-renderer" in image.lower():
-                    patched_name += "-image-renderer"
+                    patched_name = name + "-image-renderer"
 
                 results.append({
                     "namespace": namespace,
@@ -166,9 +169,7 @@ def main():
                     "image": image
                 })
 
-            # Mark this local_tool_name as processed
-            processed_tool_names.add(name)
-
+            processed_local_tool_names.add(name)  # Mark as processed
             current += 1
             show_progress(current, total)
 
