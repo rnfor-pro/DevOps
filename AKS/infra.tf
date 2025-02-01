@@ -17,8 +17,7 @@ terraform {
 provider "azurerm" {
   features {}
 
-  # If you do not need to set this explicitly,
-  # feel free to remove the subscription_id assignment
+  # OPTIONAL: If needed, specify your subscription
   subscription_id = var.subscription_id
 }
 
@@ -27,16 +26,24 @@ provider "azurerm" {
 ###############################################################################
 variable "subscription_id" {
   type        = string
-  description = "Azure subscription ID where resources will be deployed"
+  description = "Azure subscription ID for resource deployment"
   default     = "00000000-0000-0000-0000-000000000000"
 }
 
 ###############################################################################
 # DATA SOURCES
 ###############################################################################
-# Use an existing Resource Group named 'corerg' (do not create it)
 data "azurerm_resource_group" "this" {
+  # Use the existing resource group 'corerg'
   name = "corerg"
+}
+
+# ---------------------------------------------------------------------------
+# ********* NEW DATA SOURCE for existing Storage Account 'keystoneloki' ******
+# ---------------------------------------------------------------------------
+data "azurerm_storage_account" "keystoneloki" {
+  name                = "keystoneloki"
+  resource_group_name = data.azurerm_resource_group.this.name
 }
 
 ###############################################################################
@@ -46,8 +53,9 @@ locals {
   env                 = "dev"
   region              = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
-  eks_name            = "demo"
-  eks_version         = "1.27"
+
+  eks_name     = "demo"
+  eks_version  = "1.27"
 }
 
 ###############################################################################
@@ -59,18 +67,24 @@ resource "random_integer" "this" {
   max = 5000000
 }
 
-resource "azurerm_storage_account" "this" {
-  name                     = "devtest${random_integer.this.result}"
-  resource_group_name      = local.resource_group_name
-  location                 = local.region
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
+# ----------------------------------------------------------------------------
+# REMOVED: We are no longer creating a Storage Account
+# resource "azurerm_storage_account" "this" {
+#   name                     = "devtest${random_integer.this.result}"
+#   resource_group_name      = local.resource_group_name
+#   location                 = local.region
+#   account_tier             = "Standard"
+#   account_replication_type = "LRS"
+# }
+# ----------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# ********* Updated to reference data source for existing storage account ****
+# ---------------------------------------------------------------------------
 resource "azurerm_storage_container" "this" {
   name                  = "test"
-  storage_account_name  = azurerm_storage_account.this.name
   container_access_type = "private"
+  storage_account_name  = data.azurerm_storage_account.keystoneloki.name
 }
 
 resource "azurerm_user_assigned_identity" "base" {
@@ -85,13 +99,15 @@ resource "azurerm_role_assignment" "base" {
   principal_id         = azurerm_user_assigned_identity.base.principal_id
 }
 
+# ---------------------------------------------------------------------------
+# ********* Updated 'scope' to use existing storage account data source ******
+# ---------------------------------------------------------------------------
 resource "azurerm_role_assignment" "dev_test" {
-  scope                = azurerm_storage_account.this.id
+  scope                = data.azurerm_storage_account.keystoneloki.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.base.principal_id
 }
 
-# Use existing Resource Group references for location & name
 resource "azurerm_virtual_network" "this" {
   name                = "main"
   address_space       = ["10.0.0.0/16"]
