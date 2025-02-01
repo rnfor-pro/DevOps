@@ -5,11 +5,13 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.75.0"
+      # pin or range as needed
+      version = "~> 3.80.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = ">= 2.1.0"
+      # pin or range as needed
+      version = "~> 2.12.0"
     }
   }
 }
@@ -34,13 +36,9 @@ variable "subscription_id" {
 # DATA SOURCES
 ###############################################################################
 data "azurerm_resource_group" "this" {
-  # Use the existing resource group 'corerg'
   name = "corerg"
 }
 
-# ---------------------------------------------------------------------------
-# ********* NEW DATA SOURCE for existing Storage Account 'keystoneloki' ******
-# ---------------------------------------------------------------------------
 data "azurerm_storage_account" "keystoneloki" {
   name                = "keystoneloki"
   resource_group_name = data.azurerm_resource_group.this.name
@@ -53,60 +51,46 @@ locals {
   env                 = "dev"
   region              = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
-
-  eks_name     = "demo"
-  eks_version  = "1.27"
+  aks_name            = "demo"
+  aks_version         = "1.27"
 }
 
 ###############################################################################
 # RESOURCES
 ###############################################################################
 
+# Generate a random integer (for demonstration; not strictly required)
 resource "random_integer" "this" {
   min = 10000
   max = 5000000
 }
 
-# ----------------------------------------------------------------------------
-# REMOVED: We are no longer creating a Storage Account
-# resource "azurerm_storage_account" "this" {
-#   name                     = "devtest${random_integer.this.result}"
-#   resource_group_name      = local.resource_group_name
-#   location                 = local.region
-#   account_tier             = "Standard"
-#   account_replication_type = "LRS"
-# }
-# ----------------------------------------------------------------------------
-
-# ---------------------------------------------------------------------------
-# ********* Updated to reference data source for existing storage account ****
-# ---------------------------------------------------------------------------
+# We are NOT creating a new storage account; referencing an existing one:
 resource "azurerm_storage_container" "this" {
   name                  = "test"
   container_access_type = "private"
   storage_account_name  = data.azurerm_storage_account.keystoneloki.name
 }
 
+# User-Assigned Managed Identity (UAMI)
 resource "azurerm_user_assigned_identity" "base" {
   name                = "base"
   location            = local.region
   resource_group_name = local.resource_group_name
 }
 
-resource "azurerm_role_assignment" "base" {
-  scope                = data.azurerm_resource_group.this.id
-  role_definition_name = "Network Contributor"
-  principal_id         = azurerm_user_assigned_identity.base.principal_id
-}
+# Remove or comment out if you don't want Terraform to manage role assignments
+# resource "azurerm_role_assignment" "base" {
+#   scope                = data.azurerm_resource_group.this.id
+#   role_definition_name = "Network Contributor"
+#   principal_id         = azurerm_user_assigned_identity.base.principal_id
+# }
 
-# ---------------------------------------------------------------------------
-# ********* Updated 'scope' to use existing storage account data source ******
-# ---------------------------------------------------------------------------
-resource "azurerm_role_assignment" "dev_test" {
-  scope                = data.azurerm_storage_account.keystoneloki.id
-  role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.base.principal_id
-}
+# resource "azurerm_role_assignment" "dev_test" {
+#   scope                = data.azurerm_storage_account.keystoneloki.id
+#   role_definition_name = "Contributor"
+#   principal_id         = azurerm_user_assigned_identity.base.principal_id
+# }
 
 resource "azurerm_virtual_network" "this" {
   name                = "main"
@@ -133,16 +117,19 @@ resource "azurerm_subnet" "subnet2" {
   virtual_network_name = azurerm_virtual_network.this.name
 }
 
+###############################################################################
+# DISABLE AUTOSCALING IN THE AKS CLUSTER
+###############################################################################
 resource "azurerm_kubernetes_cluster" "this" {
-  name                = "${local.env}-${local.eks_name}"
+  name                = "${local.env}-${local.aks_name}"
   location            = local.region
   resource_group_name = local.resource_group_name
   dns_prefix          = "devaks1"
 
-  kubernetes_version        = local.eks_version
+  kubernetes_version        = local.aks_version
   automatic_channel_upgrade = "stable"
   private_cluster_enabled   = false
-  node_resource_group       = "${local.resource_group_name}-${local.env}-${local.eks_name}"
+  node_resource_group       = "${local.resource_group_name}-${local.env}-${local.aks_name}"
 
   # It's in Preview
   # api_server_access_profile {
@@ -150,9 +137,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   #   subnet_id                = azurerm_subnet.subnet1.id
   # }
 
-  # For production, change to "Standard"
-  sku_tier = "Free"
-
+  sku_tier                  = "Free"  # For production, "Standard"
   oidc_issuer_enabled       = true
   workload_identity_enabled = true
 
@@ -166,12 +151,19 @@ resource "azurerm_kubernetes_cluster" "this" {
     name                 = "general"
     vm_size              = "Standard_D2_v2"
     vnet_subnet_id       = azurerm_subnet.subnet1.id
-    orchestrator_version = local.eks_version
-    type                 = "VirtualMachineScaleSets"
-    enable_auto_scaling  = true
-    node_count           = 1
-    min_count            = 1
-    max_count            = 10
+    orchestrator_version = local.aks_version
+
+    # -----------------------------
+    # Autoscaling DISABLED:
+    # -----------------------------
+    #  enable_auto_scaling = true
+    #  min_count           = 1
+    #  max_count           = 10
+
+    # Instead, a static node_count:
+    node_count = 2
+
+    type = "VirtualMachineScaleSets"
 
     node_labels = {
       role = "general"
@@ -187,29 +179,40 @@ resource "azurerm_kubernetes_cluster" "this" {
     env = local.env
   }
 
+  # If you had depends_on referencing role assignments, remove or comment it out
+  # depends_on = [
+  #   azurerm_role_assignment.base
+  # ]
+
   lifecycle {
+    # We can remove ignore_changes for node_count if you want TF to manage it
+    # But let's keep it to avoid drifting. 
     ignore_changes = [default_node_pool[0].node_count]
   }
-
-  depends_on = [
-    azurerm_role_assignment.base
-  ]
 }
 
+###############################################################################
+# DISABLE AUTOSCALING IN THE ADDITIONAL NODE POOL
+###############################################################################
 resource "azurerm_kubernetes_cluster_node_pool" "spot" {
   name                  = "spot"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vm_size               = "Standard_DS2_v2"
   vnet_subnet_id        = azurerm_subnet.subnet1.id
-  orchestrator_version  = local.eks_version
+  orchestrator_version  = local.aks_version
   priority              = "Spot"
   spot_max_price        = -1
   eviction_policy       = "Delete"
 
-  enable_auto_scaling = true
-  node_count          = 1
-  min_count           = 1
-  max_count           = 10
+  # -----------------------------
+  # Autoscaling DISABLED:
+  # -----------------------------
+  #  enable_auto_scaling = true
+  #  min_count           = 1
+  #  max_count           = 10
+
+  # Instead, a static node_count:
+  node_count = 1
 
   node_labels = {
     role                                    = "spot"
@@ -225,6 +228,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "spot" {
     env = local.env
   }
 
+  # If you no longer want to ignore node_count changes, remove ignore_changes
   lifecycle {
     ignore_changes = [node_count]
   }
