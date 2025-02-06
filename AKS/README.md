@@ -32,4 +32,10 @@ Create a `terraform.tfvars` file with a unique `deployment_id`. This ensures tha
   deployment_id = "user2-unique-id"
   ```
 
-This approach ensures that each deployment is uniquely identified, and resources created by different users do not conflict with each other.   
+This approach ensures that each deployment is uniquely identified, and resources created by different users do not conflict with each other. 
+
+```hcl
+terraform init
+terraform plan
+terraform apply
+```
