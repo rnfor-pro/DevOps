@@ -115,7 +115,14 @@ resource "azurerm_kubernetes_cluster" "this" {
 # DISABLE AUTOSCALING IN THE ADDITIONAL NODE POOL
 ###############################################################################
 resource "azurerm_kubernetes_cluster_node_pool" "spot" {
-  name                  = "spot-${var.deployment_id}"
+  name = substr(
+    replace(
+      lower("spot${var.deployment_id}"), # Remove hyphens and convert to lowercase
+      "/[^a-z0-9]/",                     # Remove any remaining invalid characters
+      ""
+    ),
+    0, 12                                # Truncate to 12 characters
+  )
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vm_size               = "Standard_DS2_v2"
   vnet_subnet_id        = azurerm_subnet.subnet1.id
