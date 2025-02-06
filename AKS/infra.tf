@@ -1,38 +1,4 @@
 ###############################################################################
-# TERRAFORM & PROVIDER CONFIG
-###############################################################################
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      # pin or range as needed
-      version = "~> 3.80.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      # pin or range as needed
-      version = "~> 2.12.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  features {}
-
-  # OPTIONAL: If needed, specify your subscription
-  subscription_id = var.subscription_id
-}
-
-###############################################################################
-# VARIABLES
-###############################################################################
-variable "subscription_id" {
-  type        = string
-  description = "Azure subscription ID for resource deployment"
-  default     = "00000000-0000-0000-0000-000000000000"
-}
-
-###############################################################################
 # DATA SOURCES
 ###############################################################################
 data "azurerm_resource_group" "this" {
@@ -43,18 +9,6 @@ data "azurerm_storage_account" "keystoneloki" {
   name                = "keystoneloki"
   resource_group_name = data.azurerm_resource_group.this.name
 }
-
-###############################################################################
-# LOCALS
-###############################################################################
-locals {
-  env                 = "dev"
-  region              = data.azurerm_resource_group.this.location
-  resource_group_name = data.azurerm_resource_group.this.name
-  aks_name            = "demo"
-  aks_version         = "1.27"
-}
-
 ###############################################################################
 # RESOURCES
 ###############################################################################
@@ -67,33 +21,20 @@ resource "random_integer" "this" {
 
 # We are NOT creating a new storage account; referencing an existing one:
 resource "azurerm_storage_container" "this" {
-  name                  = "test"
+  name                  = "test-${var.deployment_id}"
   container_access_type = "private"
   storage_account_name  = data.azurerm_storage_account.keystoneloki.name
 }
 
 # User-Assigned Managed Identity (UAMI)
 resource "azurerm_user_assigned_identity" "base" {
-  name                = "base"
+  name                = "base-${var.deployment_id}"
   location            = local.region
   resource_group_name = local.resource_group_name
 }
 
-# Remove or comment out if you don't want Terraform to manage role assignments
-# resource "azurerm_role_assignment" "base" {
-#   scope                = data.azurerm_resource_group.this.id
-#   role_definition_name = "Network Contributor"
-#   principal_id         = azurerm_user_assigned_identity.base.principal_id
-# }
-
-# resource "azurerm_role_assignment" "dev_test" {
-#   scope                = data.azurerm_storage_account.keystoneloki.id
-#   role_definition_name = "Contributor"
-#   principal_id         = azurerm_user_assigned_identity.base.principal_id
-# }
-
 resource "azurerm_virtual_network" "this" {
-  name                = "main"
+  name                = "main-${var.deployment_id}"
   address_space       = ["10.0.0.0/16"]
   location            = local.region
   resource_group_name = local.resource_group_name
@@ -104,14 +45,14 @@ resource "azurerm_virtual_network" "this" {
 }
 
 resource "azurerm_subnet" "subnet1" {
-  name                 = "subnet1"
+  name                 = "subnet1-${var.deployment_id}"
   address_prefixes     = ["10.0.0.0/19"]
   resource_group_name  = local.resource_group_name
   virtual_network_name = azurerm_virtual_network.this.name
 }
 
 resource "azurerm_subnet" "subnet2" {
-  name                 = "subnet2"
+  name                 = "subnet2-${var.deployment_id}"
   address_prefixes     = ["10.0.32.0/19"]
   resource_group_name  = local.resource_group_name
   virtual_network_name = azurerm_virtual_network.this.name
@@ -124,18 +65,12 @@ resource "azurerm_kubernetes_cluster" "this" {
   name                = "${local.env}-${local.aks_name}"
   location            = local.region
   resource_group_name = local.resource_group_name
-  dns_prefix          = "devaks1"
+  dns_prefix          = "devaks1-${var.deployment_id}"
 
   kubernetes_version        = local.aks_version
   automatic_channel_upgrade = "stable"
   private_cluster_enabled   = false
   node_resource_group       = "${local.resource_group_name}-${local.env}-${local.aks_name}"
-
-  # It's in Preview
-  # api_server_access_profile {
-  #   vnet_integration_enabled = true
-  #   subnet_id                = azurerm_subnet.subnet1.id
-  # }
 
   sku_tier                  = "Free"  # For production, "Standard"
   oidc_issuer_enabled       = true
@@ -148,19 +83,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   default_node_pool {
-    name                 = "general"
+    name                 = "general-${var.deployment_id}"
     vm_size              = "Standard_D2_v2"
     vnet_subnet_id       = azurerm_subnet.subnet1.id
     orchestrator_version = local.aks_version
 
-    # -----------------------------
-    # Autoscaling DISABLED:
-    # -----------------------------
-    #  enable_auto_scaling = true
-    #  min_count           = 1
-    #  max_count           = 10
-
-    # Instead, a static node_count:
     node_count = 2
 
     type = "VirtualMachineScaleSets"
@@ -179,14 +106,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     env = local.env
   }
 
-  # If you had depends_on referencing role assignments, remove or comment it out
-  # depends_on = [
-  #   azurerm_role_assignment.base
-  # ]
-
   lifecycle {
-    # We can remove ignore_changes for node_count if you want TF to manage it
-    # But let's keep it to avoid drifting. 
     ignore_changes = [default_node_pool[0].node_count]
   }
 }
@@ -195,7 +115,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 # DISABLE AUTOSCALING IN THE ADDITIONAL NODE POOL
 ###############################################################################
 resource "azurerm_kubernetes_cluster_node_pool" "spot" {
-  name                  = "spot"
+  name                  = "spot-${var.deployment_id}"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vm_size               = "Standard_DS2_v2"
   vnet_subnet_id        = azurerm_subnet.subnet1.id
@@ -204,14 +124,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "spot" {
   spot_max_price        = -1
   eviction_policy       = "Delete"
 
-  # -----------------------------
-  # Autoscaling DISABLED:
-  # -----------------------------
-  #  enable_auto_scaling = true
-  #  min_count           = 1
-  #  max_count           = 10
-
-  # Instead, a static node_count:
   node_count = 1
 
   node_labels = {
@@ -228,7 +140,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "spot" {
     env = local.env
   }
 
-  # If you no longer want to ignore node_count changes, remove ignore_changes
   lifecycle {
     ignore_changes = [node_count]
   }
