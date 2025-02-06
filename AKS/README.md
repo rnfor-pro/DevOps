@@ -39,3 +39,7 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+```hcl
+az aks get-credentials --resource-group core-rg --name <clusterName>
+```
