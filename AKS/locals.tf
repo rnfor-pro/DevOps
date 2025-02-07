@@ -40,6 +40,16 @@ locals {
       0, 12 # Node pool name max length
     )
 
+        # Spot Node Pool
+    spot_node_pool = substr(
+      replace(
+        lower("spot-${var.deployment_id}"),
+        "/[^a-z0-9-]/",
+        ""
+      ),
+      0, 12 # Node pool name max length
+    )
+
     # Storage Container
     storage_container = substr(
       replace(
