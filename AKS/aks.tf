@@ -47,3 +47,41 @@ resource "azurerm_kubernetes_cluster" "this" {
     ignore_changes = [default_node_pool[0].node_count]
   }
 }
+
+resource "azurerm_kubernetes_cluster_node_pool" "spot" {
+  name                  = substr(
+    replace(
+      lower("spot-${var.deployment_id}"),
+      "/[^a-z0-9-]/",
+      ""
+    ),
+    0, 12
+  )
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
+  vm_size               = "Standard_DS2_v2"
+  vnet_subnet_id        = azurerm_subnet.subnet1.id
+  orchestrator_version  = local.aks_version
+  priority              = "Spot"
+  spot_max_price        = -1
+  eviction_policy       = "Delete"
+
+  node_count = 1
+
+  node_labels = {
+    role                                    = "spot"
+    "kubernetes.azure.com/scalesetpriority" = "spot"
+  }
+
+  node_taints = [
+    "spot:NoSchedule",
+    "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
+  ]
+
+  tags = {
+    env = local.env
+  }
+
+  lifecycle {
+    ignore_changes = [node_count]
+  }
+}
