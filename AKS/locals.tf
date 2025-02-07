@@ -43,7 +43,7 @@ locals {
         # Spot Node Pool
     spot_node_pool = substr(
       replace(
-        lower("spot-${var.deployment_id}"),
+        lower("spot${var.deployment_id}"),
         "/[^a-z0-9-]/",
         ""
       ),
