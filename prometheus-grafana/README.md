@@ -19,6 +19,13 @@ daownload and follow prompts to install
 ```bash
 https://docs.docker.com/desktop/setup/install/windows-install/
 ```
+Clone project repo:
+```bash
+git clone https://github.com/rnfor-pro/DevOps/tree/main/prometheus-grafana
+
+cd DevOps
+cd prometheus-grafana
+```
 
 ## Install Prometheus & Grafana on Kubernetes (kube-prometheus-stack)
 In this tutorial, we'll use the kube-prometheus-stack to install Prometheus and Grafana on Kubernetes. We'll explore how Prometheus comes pre-configured to monitor the underlying Kubernetes infrastructure and learn how to configure it to monitor our own applications. 
@@ -36,11 +43,6 @@ This guide is divided into three chapters:
 1. Infrastructure set-up
 
 ### Create a kubernetes cluster using Kind
-### Single node cluster
-```bash
-kind create cluster --name kube-monitor --image kindest/node:v1.31.2 
-```
-### Multi node cluster
 
 ```bash
 kind create cluster --config cluster-config.yaml
