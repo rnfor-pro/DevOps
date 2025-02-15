@@ -1,0 +1,100 @@
+# redis-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: redis-sentinel
+spec:
+  serviceName: redis
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      initContainers:
+      - name: config
+        image: redis:7.4.1-alpine
+        command: ["sh", "-c"]
+        args:
+          - |
+            cp /tmp/redis/redis.conf /etc/redis/redis.conf
+            echo "finding master..."
+            MASTER_FDQN=$(hostname -f | sed -e 's/redis-[0-9]\./redis-0./')
+            if [ "$(redis-cli -h sentinel -p 5000 ping)" != "PONG" ]; then
+              echo "master not found, defaulting to redis-0"
+              if [ "$(hostname)" = "redis-0" ]; then
+                echo "this is redis-0, not updating config."
+              else
+                echo "replicaof $MASTER_FDQN 6379" >> /etc/redis/redis.conf
+              fi
+            else
+              echo "sentinel found, checking who is master"
+              MASTER=$(redis-cli -h sentinel -p 5000 sentinel get-master-addr-by-name mymaster | grep -E '(^redis-\d{1,})|([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)')
+              echo "master found: $MASTER"
+              echo "replicaof $MASTER 6379" >> /etc/redis/redis.conf
+            fi
+        volumeMounts:
+        - name: redis-config
+          mountPath: /etc/redis/
+        - name: config
+          mountPath: /tmp/redis/
+
+      containers:
+      - name: redis
+        image: redis:7.4.1-alpine
+        command: ["redis-server"]
+        args: ["/etc/redis/redis.conf"]
+        ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: redis-config
+          mountPath: /etc/redis/
+
+        readinessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - |
+                redis-cli PING | grep PONG
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 5
+
+      volumes:
+      - name: redis-config
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: redis-config
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "gp2"  # Must match a valid StorageClass
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: redis-sentinel
+spec:
+  clusterIP: None
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: redis
+  selector:
+    app: redis

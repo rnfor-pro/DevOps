@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-dns
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: nfor.rudolph1@gmail.com
+    privateKeySecretRef:
+      # This is where cert-manager stores your ACME account key
+      name: letsencrypt-dns-prod
+    solvers:
+    - dns01:
+        route53:
+          region: "us-east-1"
+          hostedZoneID: "Z04496012Q3COVDQNLP3M"
+          accessKeyID: "AKIASR6MHZNGFN22ZGRQ"
+          secretAccessKeySecretRef:
+            name: route53-credentials-secret
+            key: secret-access-key
+            # The namespace for the Secret is cert-manager. cert-manager knows to look there.

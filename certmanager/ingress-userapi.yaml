@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-userapi
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nfor-pro.org
+    http:
+      paths:
+      - path: /user-api(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: userapi-svc
+            port:
+              number: 80
