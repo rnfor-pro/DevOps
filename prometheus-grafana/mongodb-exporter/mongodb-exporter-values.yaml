@@ -1,0 +1,10 @@
+existingSecret:
+  name: "mongodb-secret"
+  key: "CONNECTION_URI"
+
+serviceMonitor:
+  enabled: true
+  interval: 30s
+  scrapeTimeout: 10s
+  additionalLabels: 
+    release: prometheus  # the prometheus instance is configured only to discover service monitors that has this label
