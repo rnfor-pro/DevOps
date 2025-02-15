@@ -16,9 +16,9 @@ docker --version
 Windows user:
 daownload and follow prompts to install
 
-```bash
-https://docs.docker.com/desktop/setup/install/windows-install/
-```
+
+[click here to install](https://docs.docker.com/desktop/setup/install/windows-install/)
+
 Clone project repo:
 ```bash
 git clone https://github.com/rnfor-pro/DevOps/tree/main/prometheus-grafana
