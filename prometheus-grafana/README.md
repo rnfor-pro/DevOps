@@ -21,7 +21,7 @@ daownload and follow prompts to install
 
 Clone project repo:
 ```bash
-git clone https://github.com/rnfor-pro/DevOps/tree/main/prometheus-grafana
+git clone https://github.com/rnfor-pro/DevOps.git
 
 cd DevOps
 cd prometheus-grafana
