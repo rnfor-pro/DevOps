@@ -190,7 +190,7 @@ resource "aws_instance" "monitoring_server" {
 }
 
 resource "aws_eip" "monitoring_elastic_ip" {
-  vpc = true
+  vpc      = true
   instance = aws_instance.monitoring_server.id
 }
 
